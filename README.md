@@ -1,4 +1,4 @@
-# watchstep's blog [https://blog.watchstep.me/]
+# watchstep's blog https://blog.watchstep.me/
 
 ### This blog is built using [HUGO](https://gohugo.io/) & [Netlify](https://www.netlify.com/)
 
