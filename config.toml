@@ -1,4 +1,4 @@
-baseURL = 'https://blog.watchstep.me/'
+baseURL = 'https://blog.watchstep.me'
 languageCode = 'kr-ko'
 title = 'My New Blog'
 theme = 'blowfish' 
