@@ -1,6 +1,6 @@
 baseURL = 'https://blog.watchstep.me/'
 languageCode = 'kr-ko'
-title = 'My New Hugo Site'
+title = 'My New Blog'
 theme = 'blowfish' 
 links = [
   { GitHub = "https://github.com/watchstep" }
