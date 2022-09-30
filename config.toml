@@ -1,7 +1,10 @@
-baseURL = 'https://blog.watchstep.me'
-languageCode = 'kr-ko'
+baseURL = 'https://blog.watchstep.me/'
+languageCode = 'ko-kr'
 title = 'My New Blog'
-theme = 'blowfish' 
+theme = 'blowfish'
+
+[author]
+name = 'watchstep'
 links = [
   { GitHub = "https://github.com/watchstep" }
 ]
