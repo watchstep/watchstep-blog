@@ -1,4 +1,7 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
+baseURL = 'https://blog.watchstep.me/'
+languageCode = 'kr-ko'
 title = 'My New Hugo Site'
 theme = 'blowfish' 
+links = [
+  { GitHub = "https://github.com/watchstep" }
+]
