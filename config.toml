@@ -1,6 +1,6 @@
 baseURL = 'https://blog.watchstep.me/'
 languageCode = 'en'
-title = 'watchstep's blog'
+title = "watchstep's blog"
 theme = 'blowfish'
 defaultContentLanguage = "en"
 
@@ -16,3 +16,7 @@ summaryLength = 30
 [author]
   name = 'watchstep'
   headline = 'Watch Your Step!'
+  links = [
+    {email = 'cathy033077@yonesi.ac.kr'},
+    {github = 'https://github.com/watchstep'}
+  ]
