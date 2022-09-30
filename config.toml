@@ -17,6 +17,6 @@ summaryLength = 30
   name = 'watchstep'
   headline = 'Watch Your Step!'
   links = [
-    {email = 'cathy033077@yonsei.ac.kr'},
+    {email = 'mailto:cathy033077@yonsei.ac.kr'},
     {github = 'https://github.com/watchstep'}
   ]
