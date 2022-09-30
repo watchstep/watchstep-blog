@@ -1,10 +1,21 @@
 baseURL = 'https://blog.watchstep.me/'
-languageCode = 'ko-kr'
+languageCode = 'en'
 title = 'My New Blog'
 theme = 'blowfish'
+defaultContentLanguage = "en"
+
+enableRobotsTXT = true
+paginate = 10
+summaryLength = 30
+
+# googleAnalytics = "G-XXXXXXXXX"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
 [author]
-name = 'watchstep'
-links = [
+  name = 'watchstep'
+  bio = 'Watch Your Step!'
+  links = [
   { GitHub = "https://github.com/watchstep" }
-]
+  ]
