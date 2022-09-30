@@ -15,7 +15,4 @@ summaryLength = 30
 
 [author]
   name = 'watchstep'
-  bio = 'Watch Your Step!'
-  links = [
-  { GitHub = "https://github.com/watchstep" }
-  ]
+  headline = 'Watch Your Step!'
