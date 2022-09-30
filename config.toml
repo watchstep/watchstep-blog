@@ -1,6 +1,6 @@
 baseURL = 'https://blog.watchstep.me/'
 languageCode = 'en'
-title = 'My New Blog'
+title = 'watchstep's blog'
 theme = 'blowfish'
 defaultContentLanguage = "en"
 
