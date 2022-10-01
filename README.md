@@ -1,6 +1,5 @@
 <div align="center">
-<img src="assets/img/logo.png" height="200px" width="200px">
-
+<img src="assets/img/logo.png" height="150px" width="150px">
 <a href="https://blog.watchstep.me/"><h1>watchstep's blog</h1></a>
 </div>
 
