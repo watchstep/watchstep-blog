@@ -16,7 +16,11 @@ summaryLength = 30
 [author]
   name = 'watchstep'
   headline = 'Watch Your Step!'
+  bio = 'sd'
   links = [
     {email = 'mailto:cathy033077@yonsei.ac.kr'},
     {github = 'https://github.com/watchstep'}
   ]
+
+[homepage]
+  showRecent = true
