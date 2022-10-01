@@ -1,19 +1,16 @@
 # [watchstep's blog](https://blog.watchstep.me/)
 
-### This blog is built using [HUGO](https://gohugo.io/) & [Netlify](https://www.netlify.com/)
-
-### My previous blog is [Take heed : 개발 블로그](https://takeheed.tistory.com/)
-
-### Based on [Blowfish](https://jamstackthemes.dev/theme/blowfish/) theme
-
----
+> ### This blog is built using [HUGO](https://gohugo.io/) & [Netlify](https://www.netlify.com/)
+> ### My previous blog is [Take heed : 개발 블로그](https://takeheed.tistory.com/)
+> ### Based on [Blowfish](https://jamstackthemes.dev/theme/blowfish/) theme
 <br>
 
-- [Add Page](#add-page)
-- [Add External Page](#add-external-page)
-- [Thumbnails](#thumbnails)
-- [Simple Page](#simple-page)
-- [Start the HUGO Server Before Publish](#start-the-hugo-server-before-publish)
+### [Add Page](#add-page)
+### [Add External Page](#add-external-page)
+### [Thumbnails](#thumbnails)
+### [Simple Page](#simple-page)
+### [Start the HUGO Server Before Publish](#start-the-hugo-server-before-publish)
+<br>
 
 ### Add Page
 ```
