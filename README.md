@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/img/logo.png" height="200px" width="200px"></p>
 
-# <center>[watchstep's blog](https://blog.watchstep.me/)
+# <center> [watchstep's blog](https://blog.watchstep.me/)</center>
 
 ### This blog is built using [HUGO](https://gohugo.io/) & [Netlify](https://www.netlify.com/)
  ### My previous blog is [Take heed : 개발 블로그](https://takeheed.tistory.com/)
