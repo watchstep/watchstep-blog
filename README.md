@@ -1,23 +1,24 @@
-# [watchstep's blog](https://blog.watchstep.me/)
+# <center>[watchstep's blog](https://blog.watchstep.me/)
+![]()
+<p align="center"><img src="assets/img/logo.png" height="200px" width="200px"></p>
 
-> ### This blog is built using [HUGO](https://gohugo.io/) & [Netlify](https://www.netlify.com/)
-> ### My previous blog is [Take heed : 개발 블로그](https://takeheed.tistory.com/)
-> ### Based on [Blowfish](https://jamstackthemes.dev/theme/blowfish/) theme
+
+### This blog is built using [HUGO](https://gohugo.io/) & [Netlify](https://www.netlify.com/)
+ ### My previous blog is [Take heed : 개발 블로그](https://takeheed.tistory.com/)
+### Based on [Blowfish](https://jamstackthemes.dev/theme/blowfish/) theme
 <br>
 
-### [Add Page](#add-page)
-### [Add External Page](#add-external-page)
-### [Thumbnails](#thumbnails)
-### [Simple Page](#simple-page)
-### [Start the HUGO Server Before Publish](#start-the-hugo-server-before-publish)
+- [**Add Page**](#add-page)
+- [**Add External Page**](#add-external-page)
+- [**Thumbnails**](#thumbnails)
+- [**Simple Page**](#simple-page)
+- [**Start the HUGO Server Before Publish**](#start-the-hugo-server-before-publish)
 <br>
 
 ### Add Page
 ```
 hugo new posts/<page-name>.md
 ```
-<br>
-
 **Page Example :**
 ```
 ---
@@ -35,8 +36,6 @@ _This_ is the content of my blog post.
 ```
 hugo new -k external posts/<file-name>.md
 ```
-<br>
-
 **External Page Example :**
 ```
 ---
@@ -60,6 +59,7 @@ content
     └── featured.png
 ```
 The image file should starts with `feature*` like `featured.png`.
+
 <br>
 
 ### Simple Page
@@ -78,10 +78,9 @@ _This_ page content is now full-width without any special theme features.
 ```
 hugo server
 ```
-start the HUGO server with `draft` (`draft` : true => Hugo will not publish  ) enabled
+Start the HUGO server with `draft` (`draft` : true => Hugo will not publish  ) enabled
 ```
 hugo server -D
 ```
-
 HUGO new site at http://localhost:1313/
 
