@@ -1,4 +1,7 @@
 ---
 title: "Projects"
+description: "Projects I did"
+cascade:
+  showReadingTime: false
 ---
-프로젝트 README 모음입니다.
+### This section contains all my current projects.
