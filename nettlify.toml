@@ -1,7 +1,7 @@
 # netlify.toml
 
 [build]
-  command = "hugo mod get -u && hugo --gc --minify -b $https://blog.watchstep.me/"
+  command = "hugo mod get -u && hugo --gc --minify -b $URL"
   publish = "public"
 
 [build.environment]
