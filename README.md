@@ -1,19 +1,16 @@
-# <center>[watchstep's blog](https://blog.watchstep.me/)
-![]()
 <p align="center"><img src="assets/img/logo.png" height="200px" width="200px"></p>
 
+# <center>[watchstep's blog](https://blog.watchstep.me/)
 
 ### This blog is built using [HUGO](https://gohugo.io/) & [Netlify](https://www.netlify.com/)
  ### My previous blog is [Take heed : 개발 블로그](https://takeheed.tistory.com/)
 ### Based on [Blowfish](https://jamstackthemes.dev/theme/blowfish/) theme
-<br>
 
 - [**Add Page**](#add-page)
 - [**Add External Page**](#add-external-page)
 - [**Thumbnails**](#thumbnails)
 - [**Simple Page**](#simple-page)
 - [**Start the HUGO Server Before Publish**](#start-the-hugo-server-before-publish)
-<br>
 
 ### Add Page
 ```
@@ -30,7 +27,6 @@ tags: ["how", "write", "blog"]
 ---
 _This_ is the content of my blog post.
 ```
-<br>
 
 ### Add External Page
 ```
@@ -49,7 +45,6 @@ _build:
   list: "local"
 ---
 ```
-<br>
 
 ### Thumbnails
 ```
@@ -59,8 +54,6 @@ content
     └── featured.png
 ```
 The image file should starts with `feature*` like `featured.png`.
-
-<br>
 
 ### Simple Page
 ```
@@ -72,7 +65,6 @@ layout: "simple"
 ---
 _This_ page content is now full-width without any special theme features.
 ```
-<br>
 
 ### Start the HUGO server Before Publish
 ```
