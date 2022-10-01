@@ -1,3 +1,4 @@
+# -- Site Configuration --
 baseURL = 'https://blog.watchstep.me/'
 languageCode = 'en'
 title = "watchstep's blog"
@@ -5,22 +6,16 @@ theme = 'blowfish'
 defaultContentLanguage = "en"
 
 enableRobotsTXT = true
+enableEmoji = true
 paginate = 10
 summaryLength = 30
 
 # googleAnalytics = "G-XXXXXXXXX"
 
+[sitemap]
+  changefreq = 'daily'
+  filename = 'sitemap.xml'
+  priority = 0.5
+
 [outputs]
   home = ["HTML", "RSS", "JSON"]
-
-[author]
-  name = 'watchstep'
-  headline = 'Watch Your Step!'
-  bio = 'sd'
-  links = [
-    {email = 'mailto:cathy033077@yonsei.ac.kr'},
-    {github = 'https://github.com/watchstep'}
-  ]
-
-[homepage]
-  showRecent = true
