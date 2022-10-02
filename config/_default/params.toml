@@ -50,9 +50,9 @@ mainSections = "posts"
 [list]
   showBreadcrumbs = true
   showSummary = true
-  showCards = false
+  showCards = true
   showTableOfContents = true
-  groupByYear = false
+  groupByYear = true
 
 [sitemap]
   excludedKinds = []

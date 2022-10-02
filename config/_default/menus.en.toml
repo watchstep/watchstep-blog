@@ -17,7 +17,7 @@
 
 [[main]]
   name = "Projects"
-  pageRef = "projects"
+  pageRef = "project"
   weight = 20
 
 [[main]]
@@ -30,17 +30,12 @@
 # the copyright notice. Configure as per the main menu above.
 
 [[footer]]
-  name = "**About Me**"
+  name = "About Me"
   url = "https://watchstep.me/"
   weight = 10
 
 [[footer]]
-  name = "**Tags**"
+  name = "Tags"
   pageRef = "tags"
   weight = 20
-
-[[footer]]
-  name = "**Categories**"
-  pageRef = "categories"
-  weight = 30
 
