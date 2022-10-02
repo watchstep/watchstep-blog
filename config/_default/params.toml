@@ -34,24 +34,25 @@ mainSections = "posts"
   showBreadcrumbs = true
   showDraftLabel = true
   showEdit = true
-  editURL = "https://github.com/watchstep/watchstep-blog"
+  editURL = "https://github.com/watchstep/watchstep-blog/blob/main/content"
   editAppendPath = true
   showHeadingAnchors = true
   showPagination = true
   invertPagination = false
   showReadingTime = false
   showTableOfContents = true
-  showTaxonomies = false 
+  showTaxonomies = true
   showWordCount = false
   showSummary = true
   showComments = true
   sharingLinks = false
 
 [list]
-  showBreadcrumbs = false
-  showSummary = false
-  showTableOfContents = false
-  groupByYear = true
+  showBreadcrumbs = true
+  showSummary = true
+  showCards = false
+  showTableOfContents = true
+  groupByYear = false
 
 [sitemap]
   excludedKinds = []

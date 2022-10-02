@@ -7,7 +7,7 @@ rtl = false
 
 title = ''
 logo = "img/logo.png"
-description = "My awesome website"
+description = "watchstep's blog"
 # copyright = "watchstep's blog :full_moon_with_face:"
 
 dateFormat = "2 January 2006"
