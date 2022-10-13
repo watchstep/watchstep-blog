@@ -16,14 +16,20 @@
   weight = 10
 
 [[main]]
-  name = "Projects"
-  pageRef = "project"
+  name = "Project"
+  pageRef = "projects"
   weight = 20
 
 [[main]]
   name = "Tags"
   pageRef = "tags"
   weight = 30
+
+[[main]]
+  pre = 'github'
+  identifier = 'github2'
+  url = 'https://github.com/watchstep'
+  weight = 40
 
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before

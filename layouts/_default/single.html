@@ -27,7 +27,7 @@
         var liked_article = false
 
         if (typeof auth !== 'undefined') {
-          var oid = "views_{{ .Path }}"
+          var oid = "views_{{ .File.Path }}"
           var id = oid ? oid.replaceAll("/", "-") : oid
 
           var viewed = localStorage.getItem(id);
@@ -56,27 +56,30 @@
               });
           }
 
-          var oid_likes = "likes_{{ .Path }}"
+          var oid_likes = "likes_{{ .File.Path }}"
           var id_likes = oid_likes ? oid_likes.replaceAll("/", "-") : oid_likes
 
           var liked = localStorage.getItem(id_likes);
 
           if (liked) {
             liked_article = true
-            document.querySelectorAll("button[id='likes_button']")[0].innerText = "Remove Like"
+            document.querySelectorAll("span[id='likes_button_heart']")[0].style.display = ""
+            document.querySelectorAll("span[id='likes_button_emtpty_heart']")[0].style.display = "none"
+            document.querySelectorAll("span[id='likes_button_text']")[0].innerText = "Remove Like"
           }
 
         }
 
         function like_article(id_likes) {
-          console.log("add")
-          liked_article = true
-          localStorage.setItem(id_likes, true);
-          document.querySelectorAll("button[id='likes_button']")[0].innerText = "Remove Like"
           auth.signInAnonymously()
             .then(() => {
               var docRef = db.collection('likes').doc(id_likes)
               docRef.get().then((doc) => {
+                liked_article = true
+                localStorage.setItem(id_likes, true);
+                document.querySelectorAll("span[id='likes_button_heart']")[0].style.display = ""
+                document.querySelectorAll("span[id='likes_button_emtpty_heart']")[0].style.display = "none"
+                document.querySelectorAll("span[id='likes_button_text']")[0].innerText = "Remove Like"
                 if (doc.exists) {
                   db.collection('likes').doc(id_likes).update({
                     likes: firebase.firestore.FieldValue.increment(1)
@@ -96,14 +99,15 @@
         }
 
         function remove_like_article(id_likes) {
-          console.log("remove")
-          liked_article = false
-          localStorage.setItem(id_likes, false);
-          document.querySelectorAll("button[id='likes_button']")[0].innerText = "Like"
           auth.signInAnonymously()
             .then(() => {
               var docRef = db.collection('likes').doc(id_likes)
               docRef.get().then((doc) => {
+                liked_article = false
+                localStorage.removeItem(id_likes);
+                document.querySelectorAll("span[id='likes_button_heart']")[0].style.display = "none"
+                document.querySelectorAll("span[id='likes_button_emtpty_heart']")[0].style.display = ""
+                document.querySelectorAll("span[id='likes_button_text']")[0].innerText = "Like"
                 if (doc.exists) {
                   db.collection('likes').doc(id_likes).update({
                     likes: firebase.firestore.FieldValue.increment(-1)
@@ -123,7 +127,7 @@
         }
 
         function process_article() {
-          var oid_likes = "likes_{{ .Path }}"
+          var oid_likes = "likes_{{ .File.Path }}"
           var id_likes = oid_likes ? oid_likes.replaceAll("/", "-") : oid_likes
           if (!liked_article) {
             like_article(id_likes)

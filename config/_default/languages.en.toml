@@ -5,12 +5,13 @@ isoCode = "en"
 weight = 1
 rtl = false
 
-title = ''
+title = "watchstep"
 logo = "img/logo.png"
 description = "watchstep's blog"
-# copyright = "watchstep's blog :full_moon_with_face:"
+# copyright = "Copy, _right?_ :thinking_face:"
 
 dateFormat = "2 January 2006"
+
 
 [author]
   image = "img/logo.png"
@@ -22,3 +23,4 @@ dateFormat = "2 January 2006"
   name = "watchstep's blog"
   headline = "Welcome to My blog! I'm Interested in ML & Flutter"
   bio = "일개 학부생입니다."
+  

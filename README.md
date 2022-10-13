@@ -76,4 +76,3 @@ Start the HUGO server with `draft` (`draft` : true => Hugo will not publish  ) e
 hugo server -D
 ```
 HUGO new site at http://localhost:1313/
-
