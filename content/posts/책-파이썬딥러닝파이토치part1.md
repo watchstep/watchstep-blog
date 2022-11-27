@@ -3,7 +3,7 @@ title: "[Book] 파이썬 딥러닝 파이토치 PART 1 : Pytorch 기초"
 date: 2022-08-15
 externalUrl: "https://takeheed.tistory.com/21"
 summary: "Post on Tistory"
-tags: ['book', 'ML']
+tags: ['book', 'ML', 'Pytorch']
 showReadingTime: false
 _build:
   render: "false"
