@@ -7,7 +7,7 @@ tags: ['Docker']
 ---
 # Docker 이해하기
 
-정기웅님이 진행하신 <cite>Let's get Dockered #1 세미나[^1]</cite>에서 배운 내용과 <cite>공식사이트[^2]</cite>과 <cite>타 블로그글 내용들[^3] [^4] [^5] [^6]</cite>을 토대로 작성한 블로그입니다.
+<cite>Let's get Dockered #1 세미나[^1]</cite>에서 배운 내용과 <cite>공식사이트[^2]</cite>과 <cite>타 블로그글 내용들[^3] [^4] [^5] [^6]</cite>을 토대로 작성한 블로그입니다.
 
 [^1]: [Docker_1](https://drive.google.com/open?id=1SEihvIuKXQBCmSfifIYitb00HzvxKm8C&authuser=cathy033077%40gmail.com&usp=drive_fs)
 [^2]: [Docker 공식 사이트](https://docs.docker.com/get-started/overview/)
@@ -22,13 +22,15 @@ tags: ['Docker']
 <img src='https://blog.kakaocdn.net/dn/m6Ewm/btrGARnEozl/20MGhSGanrhXK1nx1YO6Z0/img.png' width =200>
 </p>
 
-**Docker**는 **Container** 를 생성하고, 사용할 수 있는 컨테이너화(Containerization) 기술이다. Docker는 소프트웨어 서비스를 실행하는 데 필요한 애플리케이션과 모든 종속성을
+**Docker**는 **Container** 를 생성하고, 사용할 수 있는 컨테이너화(Containerization) 기술이다. Docker는 소프트웨어 서비스를 실행하는 데 필요한 애플리케이션와 모든 종속성을
 Container라는 표준화된 소프트웨어 단위로 패키징하여 애플리케이션을 인프라에 관계없이 어떤 환경에서나 항상 동일하게 실행되도록 한다. 컨테이너화 기술을 통해
 더 빠르고, 효율적으로 소프트웨어를 개발, 배포할 수 있다.
 
 ## 2. What is Container?
 
-### 2-1. VM(Virtual Machine)  vs Container
+### 2-1. What is Container?
+
+### 2-2. VM(Virtual Machine)  vs Container
 
 <p align='center'>
 <img src='https://www.sdxcentral.com/wp-content/uploads/2019/05/ContainersvsVMs_Image-1.jpg' width =800>
@@ -41,29 +43,42 @@ Container라는 표준화된 소프트웨어 단위로 패키징하여 애플리
 Host Virtualizaion(호스트 가상화)는 Host OS 위에 Guest OS가 구동되는 방식으로, Host OS의 종류에 큰 제약이 없지만, OS 위에 OS가 올라가기 때문에 overhead가 클 수 있다.
 VM(Virtual Machine)는 Host OS 없이 하드웨어에 Hypervisor(하이퍼바이저)를 설치하고, Hypervisor 위에 Guest OS가 올라간다.
 
-컨테이너는 가상 머신과 마찬가지로 애플리케이션을 관련 라이브러리 및 종속 항목과 함께 패키지로 묶어 소프트웨어 서비스 구동을 위한 격리 환경을 마련해 줍니다. 그러나 아래에서 살펴보듯 VM과의 유사점은 여기까지입니다. 컨테이너를 사용하면 개발자와 IT 운영팀이 훨씬 작은 단위로 업무를 수행할 수 있으므로 그에 따른 이점이 훨씬 많습니다.
+같은 os에서 docker engine에 의해 프로세스 격리
+컨테이너는 가상 머신과 마찬가지로 애플리케이션 실행에 필요한 모든 것들을 패키징해 소프트웨어 서비스 구동을 위한 격리 환경을 마련해준다는 공통점이 있다.
 
-컨테이너는 VM보다 훨씬 더 경량입니다.
-컨테이너는 OS 수준에서 가상화되고 VM은 하드웨어 수준에서 가상화됩니다.
-컨테이너는 OS 커널을 공유하며 VM에 필요한 것보다 훨씬 적은 메모리를 사용합니다.
-### 2-2. What is Container?
+- Container가 VM보다 훨씬 더 가볍다.
 
+- Container는 OS 수준에서 가상화되고 VM은 하드웨어 수준에서 가상화된다.
+컨테이너는 하나의 OS 커널을 공유하며 VM에 필요한 것보다 훨씬 적은 메모리를 사용한다.
+
+컨테이너는 코드와 종속성을 함께 패키지하는 앱 계층의 추상화입니다. 여러 컨테이너가 동일한 컴퓨터에서 실행되고 OS 커널을 다른 컨테이너와 공유할 수 있으며, 각 컨테이너는 사용자 공간에서 격리된 프로세스로 실행됩니다. 컨테이너는 VM(컨테이너 이미지의 크기는 일반적으로 수십 MB)보다 공간을 덜 차지하고, 더 많은 애플리케이션을 처리할 수 있으며, 더 적은 VM 및 운영 체제가 필요합니다.
+
+VM(가상 머신)은 하나의 서버를 여러 서버로 전환하는 물리적 하드웨어의 추상화입니다. 하이퍼바이저를 사용하면 단일 컴퓨터에서 여러 VM을 실행할 수 있습니다. 각 VM에는 운영 체제, 애플리케이션, 필요한 바이너리 및 라이브러리의 전체 복사본이 포함되어 있으며 수십 GB를 차지합니다. VM 부팅 속도가 느릴 수도 있습니다.
+
+가상화가 하드웨어 수준에서 발생하는 VM(가상 머신)과 달리 컨테이너는 앱 계층에서 가상화됩니다. 하나의 시스템을 활용하고, 커널을 공유하고, 운영 체제를 가상화하여 격리된 프로세스를 실행할 수 있습니다. 따라서 컨테이너가 매우가벼워져 귀중한 리소스를 유지할 수 있습니다.
 ### 2-3. LXC(LinuX Container) vs Docker
 
 ## 3. Why We need Docker?
 
 ## 4. What is Image?
 
+**Image**는 Docker Container를 만드는 데 사용되는 Read-Only 템플릿이다. (Read-Only Not Write이므로, 변경 불가능함) 애플리케이션을 실행하는 데 필요한 모든 파일을 포함한 Docker file를 빌드해 Image를 생성한다. Image는 런타임일 때, Container가 된다. 즉, Container는 Docker Engine에서 실행한 Image이다. 
+
+이해를 돕기 위해 Image를 붕어빵 틀, Container를 붕어빵으로 비유해보자.
+
 <p align='center'>
-<img src='https://tech.cloudmt.co.kr/2022/06/29/%EB%8F%84%EC%BB%A4%EC%99%80-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EC%9D%98-%EC%9D%B4%ED%95%B4-1-3-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%EC%82%AC%EC%9A%A9%EB%B2%95/images/dockercontainerstatus3.png' width =800>
+<img src='https://kyh0703.github.io/assets/images/posts/2021-09-07-post-docker-dockerfile/image-20210907220417524.png' width =500>
 </p>
 
-도커 이미지는 컨테이너를 만드는 데 사용되는 read-only 템플릿
-컨테이너 실행에 필요한 파일, 설정값 등을 포함한 도커 파일을 빌드해 이미지 생성
-도커 컨테이너는 이미지를 실행한 상태 
+한 개의 붕어빵 틀로 여러 개의 붕어빵을 만들 수 있는 것처럼, 한 번 빌드한 Image로 여러 Container를 생성할 수 있다.
+
+<p align='center'>
+<img src='https://belowthemalt.files.wordpress.com/2021/12/image.png' width =500>
+</p>
+
+Image 붕어빵 틀로 만들어진 Container 붕어빵은, 변경 불가능한 image layer 위에 Read-Write가 가능한 container layer가 추가되어 변경할 수 있게 된다.
+
 컨테이너 layer 저장
-이미지는 붕어빵 틀, 컨테이너는 붕어빵
-붕어빵 틀 하나로 여러 개의 붕어빵을 만들 수 있음
 그리고, 이미 만든 붕어빵은 붕어빵 틀이 변해도 동일한 것처럼
 이미지가 변경되어도, 이미 만들어진 컨테이너에 영향을 미치지 않음
 
