@@ -2,7 +2,7 @@
 title: "[Docker] Let's get Dockered #1"
 date: 2022-11-28T05:47:31+09:00
 summary: 'Docker 이해하기'
-draft: false
+draft: true
 tags: ['Docker']
 ---
 # Docker 이해하기
