@@ -1,0 +1,93 @@
+bridge => 도커 zero
+
+docker pull hello-word
+Using default tag: latest
+latest: Pulling from library/hello-world (도커 허브 있는 어딘가)
+layer 번호 ex) 2db29710123e : Pull complete
+
+docker pull hello-word:latest
+latest 같은 경우 계속 덮어씌워짐 => latest로부터 새로운 image를 받았다
+
+docker pull nginx
+a603fa5e3b41: Pull complete
+c39e1cda007e: Pull complete
+90cfefba34d7: Pull complete
+a38226fb7aba: Pull complete
+62583498bae6: Pull complete
+9802a2cfdb8d: Pull complete
+layer가 다 독립적으로 다운로드
+
+위쪽이 가벼워서 위쪽부터 다운로드 먼저 되고
+
+$ : 백그라운드에서 실행
+(왜 안 쓸까???)
+
+도커 제로 172.17.0.1 Gateway
+-d (detach)
+
+
+docker container stop --help
+
+Usage:  docker container stop [OPTIONS] CONTAINER [CONTAINER.. (이름 / 아이디).]
+
+Stop one or more running containers
+
+docker run -d --name test nginx (이름 바꾸기)
+9b61a0f7e8cfd9475d92587bfc4ec63bdbe9423ac4d6768f0d8b0d996d861538
+
+docker conatiner stop test (test 지우기)
+
+prune을 통해 한 꺼번에 remove
+
+무조건 체크받은 이미지만 docker hub에서 다운로드하기!
+
+echo 123 > test.txt
+cat test.txt
+# exit
+
+docker commit --help
+
+Usage:  docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+여기서 레포지터리는 이미지 이름
+
+docker commit test-latest wemade
+
+wemade는 commit을 통해 writable layer를 read-only layer로 변경해 image로 패키징
+근데 이 방법 잘 안 쓰고 docker file 사용
+
+dockerhub ID / 위치 / wemade tag
+
+docker tag --help
+
+Usage:  docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+
+
+ocker push watchstep/wemade:1.0
+The push refers to repository [docker.io/watchstep/wemade]
+7d06f8a98587: Pushed
+6cffb086835a: Pushed
+e2d75d87993c: Pushed
+5a5bafd53f76: Pushed
+f86e88a471f4: Pushed
+f7ed3797e296: Pushing  56.81MB/61.24MB
+ec4a38999118: Pushing     84MB
+
+docker commit 명령어를 통해 image를 받았는데,
+실제로는 docker file를 통해 image를 다운로드
+
+docker run -d --name test-latest nginx -p 6000:80 nginx
+
+tail : 파일 끝부분에 추가되는 것을 계속 보여줌
+
+docker run --rm hello-world
+
+ docker run --rm -d --name test-latest nginx \-p 6000:80 nginx
+
+0.0.0.0 everywhere??? 
+
+
+CMD 실행할 명령어
+docker build --help
+
+도커이미지를 위한 폴더를 따로 만들어줘라!!
+
