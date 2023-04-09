@@ -2,7 +2,7 @@
 title: "DL 인터뷰 질문 답변 모음"
 date: 2023-03-07T10:30:17+09:00
 summary: 남세동 대표님의 딥러닝 인터뷰 질문에 대한 답변 모음
-draft: false
+draft: true
 tags: ['ML', 'Interview']
 ---
 <cite>남세동 대표님 : 딥러닝이라는 주제에 대해서 개발자 면접[^1]</cite>에서 나온 질문을 주제로 작성된 블로그입니다.
