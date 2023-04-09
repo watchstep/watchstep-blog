@@ -10,7 +10,7 @@ enableEmoji = true
 paginate = 10
 summaryLength = 30
 
-# googleAnalytics = "G-XXXXXXXXX"
+#googleAnalytics = "G-XXXXXXXXX"
 
 [sitemap]
   changefreq = 'daily'
