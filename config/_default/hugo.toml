@@ -1,5 +1,5 @@
 title = "Watchstep Blog"
-baseurl = "https://blog.watchstep.me/"
+baseURL = "https://blog.watchstep.me/"
 canonifyURLs = false # convert relative links to absolute URLs
 disableAliases = true
 disableHugoGeneratorInject = true
