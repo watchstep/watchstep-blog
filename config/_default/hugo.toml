@@ -1,6 +1,6 @@
-title = "My Docs"
-baseurl = "http://localhost/"
-canonifyURLs = false
+title = "Watchstep Blog"
+baseurl = "http://blog.watchstep.me/"
+canonifyURLs = true #  # convert relative links to absolute URLs
 disableAliases = true
 disableHugoGeneratorInject = true
 # disableKinds = ["taxonomy", "term"]
@@ -17,7 +17,7 @@ defaultContentLanguage = "en"
 disableLanguages = ["de", "nl"]
 defaultContentLanguageInSubdir = false
 
-copyRight = "Copyright (c) 2020-2024 Thulite"
+copyRight = "© 2025 watchstep"
 
 [build.buildStats]
   enable = true
@@ -42,7 +42,7 @@ copyRight = "Copyright (c) 2020-2024 Thulite"
   rel  = "sitemap"
 
 [sitemap]
-  changefreq = "monthly"
+  changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
 
@@ -65,7 +65,7 @@ copyRight = "Copyright (c) 2020-2024 Thulite"
   keepWhitespace = false
 
 [related]
-  threshold = 80
+  threshold = 70
   includeNewer = true
   toLower = false
     [[related.indices]]
