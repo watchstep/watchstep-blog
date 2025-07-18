@@ -58,8 +58,8 @@ copyRight = "© 2025 watchstep"
 
 [permalinks]
   blog = "/blog/:slug/"
-  docs = "/docs/:slug/"
-# docs = "/docs/:sections[1:]/:slug/"
+  docs = "/docs/:sections[1:]/:slug/"
+# docs = "/docs/1.0/:sections[1:]/:slug/"
 
 [minify.tdewolff.html]
   keepWhitespace = false

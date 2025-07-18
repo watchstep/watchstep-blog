@@ -1,5 +1,5 @@
 # Hugo
-title = "My Docs"
+title = "Watchstep"
 description = "Congrats on setting up a new Doks project!"
 images = ["cover.png"]
 
@@ -119,7 +119,7 @@ mainSections = ["docs"]
 [seo]
   [seo.title]
     separator = " | "
-    suffix = ""
+    suffix = "Watchstep Blog"
   [seo.favicons]
     sizes = []
     icon = "favicon.png" # favicon.png (default)
@@ -127,10 +127,10 @@ mainSections = ["docs"]
     maskIcon = "mask-icon.svg" # mask-icon.svg (default)
     maskIconColor = "white" # white (default)
   [seo.schemas]
-    type = "Organization" # Organization (default) or Person
+    type = "Person" # Organization (default) or Person
     logo = "favicon-512x512.png" # Logo of Organization — favicon-512x512.png (default)
-    name = "Thulite" # Name of Organization or Person
-    sameAs = [] # E.g. ["https://github.com/thuliteio/thulite", "https://fosstodon.org/@thulite"]
+    name = "Juii Kim (김주의)" # Name of Organization or Person
+    sameAs = ["https://blog.watchstep.me", "https://watchstep-blog.netlify.app"] # E.g. ["https://github.com/thuliteio/thulite", "https://fosstodon.org/@thulite"]
     images = ["cover.png"] # ["cover.png"] (default)
     article = [] # Article sections
     newsArticle = [] # NewsArticle sections
