@@ -16,7 +16,7 @@ endif
 # Main commands
 help:
 	@echo "Available commands:"
-	@echo "  make serve      - Run local server"
+	@echo "  make dev    - Run local server"
 	@echo "  make build      - Build the site"
 	@echo "  make deploy     - Push to GitHub (auto deploy)"
 	@echo "  make new-post   - Create a new blog post"
@@ -26,7 +26,7 @@ help:
 	@echo "Using script: $(NEW_POST_SCRIPT)"
 
 # Run local server
-serve:
+dev:
 	npm run dev
 
 # Build the site
