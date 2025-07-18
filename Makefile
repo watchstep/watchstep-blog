@@ -2,11 +2,15 @@
 
 # Detect OS
 ifeq ($(OS),Windows_NT)
-    NEW_POST_SCRIPT = scripts\new-post.bat
+    NEW_POST_SCRIPT = scripts/new-post.bat
     OS_NAME = Windows
+    RM_CMD = rmdir /s /q
+    DATE_CMD = powershell -Command "Get-Date -Format 'yyyy-MM-dd HH:mm'"
 else
     NEW_POST_SCRIPT = scripts/new-post.sh
     OS_NAME = Unix (macOS/Linux)
+    RM_CMD = rm -rf
+    DATE_CMD = date +'%Y-%m-%d %H:%M'
 endif
 
 # Main commands
@@ -32,7 +36,7 @@ build:
 # Push to GitHub (Netlify auto deploy)
 deploy:
 	git add .
-	git commit -m "Update blog: $(shell date +'%Y-%m-%d %H:%M')"
+	git commit -m "chore: update blog $(shell $(DATE_CMD))"
 	git push origin main
 
 # Create a new blog post (OS-aware)
@@ -41,4 +45,4 @@ new-post:
 
 # Clean build files
 clean:
-	rm -rf public resources
+	$(RM_CMD) public resources
