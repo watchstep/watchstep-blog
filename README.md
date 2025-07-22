@@ -1,9 +1,14 @@
 # Watchstep Blog
 
+[![Hugo](https://img.shields.io/badge/Hugo-Doks-blue?style=for-the-badge&logo=hugo)](https://gohugo.io/)
+[![Node.js](https://img.shields.io/badge/Node.js-20.10.0-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+[![Netlify](https://img.shields.io/badge/Netlify-Deployed-00C7B7?style=for-the-badge&logo=netlify)](https://blog.watchstep.me)
+
 A static site powered by **Hugo v0.145.0‑extended** and **Node v20.10.0 / npm v10.2.4**.
 Built with the **Doks** template.
 
-**🌐 [Live Demo](https://blog.watchstep.me)**
+**[🌐 Live Demo ↗](https://blog.watchstep.me)**
 
 ## 🚀 Quick Start
 
