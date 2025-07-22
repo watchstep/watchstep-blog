@@ -1,42 +1,44 @@
 # Watchstep Blog
 
-A modern blog built with Hugo and Doks theme.
+A static site powered by **Hugo v0.145.0‑extended** and **Node v20.10.0 / npm v10.2.4**.
+Built with the **Doks** template.
+
+**🌐 [Live Demo](https://blog.watchstep.me)**
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js (v16 or higher)
-- Hugo (Extended version)
-- Git
-
-### Installation
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/watchstep/watchstep-blog.git
 cd watchstep-blog
-npm install
-make serve
+
+npm ci            # Install locked dependencies
+npm run dev       # Start local server → http://localhost:1313
 ```
 
-## 📝 Creating Blog Posts
-
-Cross-platform blog post creation:
+## 🔨 Build & Deploy
 
 ```bash
-make new-post
+npm run build     # ⇒ hugo --minify --gc → public/
 ```
 
-**Features:**
-- **OS Detection**: Automatically uses the right script for your OS
-- **Smart Naming**: Converts title to clean folder name (lowercase, underscores)
-- **Original Title**: Keeps original title in file content
-- **Date Structure**: Organizes posts by year/month
+## 📄 Writing Content
 
-**Example:**
-- Input: `Hi  안녕  ApPle`
-- Folder: `hi_안녕_apple`
-- Title in file: `Hi  안녕  ApPle`
+```bash
+# Create new post
+npm run create blog/my-post/index.md
 
-## 🛠️ Available Commands
+# Preview locally (`draft:true`)
+npm run dev
+```
+
+**Quick tips:**
+- Markdown files are located under the `content/` folder
+- Posts with `draft: true` are only visible in local preview
+- Set `draft: false` in frontmatter to publish
+- Add images to `content/posts/my-post/images/`
+- Use `npm run dev` for live reload during writing
+
+## 🛠️ Makefile Commands
 
 ```bash
 make help      # Show all commands
@@ -47,36 +49,38 @@ make new-post  # Create a new blog post
 make clean     # Clean build files
 ```
 
-## 📁 Project Structure
+## 🛠 Updating Doks Template
 
-```
-content/
-├── blog/
-│   ├── 2024/
-│   │   ├── 01/
-│   │   │   └── my-post/
-│   │   │       └── index.md
-│   │   └── 02/
-│   └── 2023/
-├── docs/
-└── _index.md
+```bash
+# Check & update to latest version
+npm outdated @thulite/doks-core
+npm install @thulite/doks-core@latest @thulite/images@latest @thulite/seo@latest
 
-scripts/
-├── new-post.bat      # Windows
-├── new-post-mac.sh   # macOS
-└── new-post.sh       # Linux
+# Or install specific versions
+npm install @thulite/doks-core@1.6.0 @thulite/images@3.1.0
 ```
 
-## 🎨 Customization
+> Check release notes and changelog for potential conflicts with custom `config/` or `layouts/` files
 
-- Edit `config/_default/params.toml` for site configuration
-- Modify `assets/scss/` for styling
-- Update `layouts/` for custom templates
+## 📂 Project Structure
 
-## 📦 Deployment
+```
+content/         # Markdown posts & pages
+assets/          # Sass/JS processed by Hugo Pipes
+static/          # Static files (favicons, images, etc.)
+config/          # hugo.toml + environment configs
+```
 
-The site is configured for automatic deployment via Netlify. Simply push to the main branch to deploy.
+**Key files excluded from Git:**
+```
+public/          # Build output
+resources/       # Hugo cache
+node_modules/    # Dependencies
+```
 
-## 📄 License
+## 📝 License & Credits
 
-This project is licensed under the MIT License.
+- **Template** © Henk Verlinde (MIT License)
+- **Content** © Juii Kim, 2025
+
+---
