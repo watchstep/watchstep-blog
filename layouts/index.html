@@ -2,9 +2,9 @@
 
 {{/* ===== Title / Subtitle from content/_index.md ===== */}}
 {{ $pageTitle := or .Title .Site.Title }}
-{{ $subtitle  := or .Params.lead (site.Params.home.subtitle | default "A minimal blog about AI & development.") }}
+{{ $subtitle  := or .Params.lead (site.Params.home.subtitle | default "Step into AI & Development") }}
 
-{{/* ===== Time window: last 6 months (26 weeks), Monday-aligned ===== */}}
+{{/* ===== Heatmap window: last 6 months (26 weeks), Monday-aligned ===== */}}
 {{ $now := now }}
 {{ $weeks := 26 }}
 {{ $oneDay := 86400 }}
@@ -14,7 +14,7 @@
 {{ $shift := index $wdmap $wdstr | default 0 }}
 {{ $start := sub $rawStart (mul $shift $oneDay) }}
 
-{{/* ===== Posts ===== */}}
+{{/* ===== Posts in window ===== */}}
 {{ $allPosts  := where .Site.RegularPages "Section" "in" (slice "blog" "posts") }}
 {{ $inWindow  := where $allPosts "Date.Unix" ">" $start }}
 {{ $S := newScratch }}
@@ -58,9 +58,7 @@
 
   <div class="ws-center">
     <h1 class="display-4 fw-bold text-center m-0">{{ $pageTitle }}</h1>
-    {{ with $subtitle }}
-      <p class="lead text-muted text-center mt-1 ws-subtitle">{{ . }}</p>
-    {{ end }}
+    {{ with $subtitle }}<p class="lead text-muted text-center mt-1 ws-subtitle">{{ . }}</p>{{ end }}
 
     <!-- Stats -->
     <div class="ws-stats ws-stats--top">
@@ -107,9 +105,9 @@
 
         <!-- Weekdays (Sun on top; show labels at Mon(2)/Wed(4)/Fri(6)) -->
         <g class="ws-weekdays" text-anchor="end" font-size="11" dominant-baseline="middle">
-          <text x="{{ sub $left 8 }}" y="{{ add $top (add $step          (div $cell 2)) }}">Mon</text>
-          <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 3 $step)  (div $cell 2)) }}">Wed</text>
-          <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 5 $step)  (div $cell 2)) }}">Fri</text>
+          <text x="{{ sub $left 8 }}" y="{{ add $top (add $step         (div $cell 2)) }}">Mon</text>
+          <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 3 $step) (div $cell 2)) }}">Wed</text>
+          <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 5 $step) (div $cell 2)) }}">Fri</text>
         </g>
 
         <!-- Cells -->
@@ -157,4 +155,8 @@
 {{ end }}
 
 {{ define "sidebar-prefooter" }}{{ end }}
-{{ define "sidebar-footer"  }}{{ end }}
+
+{{ define "sidebar-footer" }}
+  {{ $sprinkle := resources.Get "js/ws-sprinkle.js" | js.Build | resources.Fingerprint }}
+  <script defer src="{{ $sprinkle.RelPermalink }}"></script>
+{{ end }}
