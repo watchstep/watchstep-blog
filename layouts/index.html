@@ -1,10 +1,8 @@
 {{ define "main" }}
 
-{{/* ===== Page text ===== */}}
-{{ $subtitle := site.Params.home.subtitle | default "A minimal blog about AI & development." }}
-
-{{/* ===== Asset (seedling) ===== */}}
-{{ $seedling := "images/seedling.png" | absURL }}
+{{/* ===== Title / Subtitle from content/_index.md ===== */}}
+{{ $pageTitle := or .Title .Site.Title }}
+{{ $subtitle  := or .Params.lead (site.Params.home.subtitle | default "A minimal blog about AI & development.") }}
 
 {{/* ===== Time window: last 6 months (26 weeks), Monday-aligned ===== */}}
 {{ $now := now }}
@@ -17,9 +15,8 @@
 {{ $start := sub $rawStart (mul $shift $oneDay) }}
 
 {{/* ===== Posts ===== */}}
-{{ $allPosts := where .Site.RegularPages "Section" "in" (slice "blog" "posts") }}
-{{ $inWindow := where $allPosts "Date.Unix" ">" $start }}
-
+{{ $allPosts  := where .Site.RegularPages "Section" "in" (slice "blog" "posts") }}
+{{ $inWindow  := where $allPosts "Date.Unix" ">" $start }}
 {{ $S := newScratch }}
 {{ range $p := $inWindow }}
   {{ $k := $p.Date.Format "2006-01-02" }}
@@ -51,16 +48,21 @@
 {{ $svgH := add $top (mul 7 $step) }}
 
 <section class="section container py-4">
-  <!-- 페이지 전체 미니멀 새싹(스프링클) -->
-  <div id="ws-sprinkle"
+
+  <!-- 페이지 전체 ‘새싹 스프링클’ 레이어 (외부 JS가 읽어감) -->
+  <div
+    id="ws-sprinkle"
     aria-hidden="true"
-    data-seedling="{{ 'images/seedling.png' | absURL }}"></div>
+    data-seedling="{{ "images/seedling.png" | absURL }}">
+  </div>
 
   <div class="ws-center">
-    <h1 class="display-4 fw-bold text-center m-0">Watchstep's Blog</h1>
-    <p class="lead text-muted text-center mt-1 ws-subtitle">{{ $subtitle }}</p>
+    <h1 class="display-4 fw-bold text-center m-0">{{ $pageTitle }}</h1>
+    {{ with $subtitle }}
+      <p class="lead text-muted text-center mt-1 ws-subtitle">{{ . }}</p>
+    {{ end }}
 
-    <!-- Stats ABOVE the heatmap (구분선 없이, 라벨/서브는 작고 연하게) -->
+    <!-- Stats -->
     <div class="ws-stats ws-stats--top">
       <div class="ws-metric">
         <div class="ws-metric__label">Total posts</div>
@@ -83,10 +85,11 @@
       </div>
     </div>
 
-    <!-- Heatmap -->
+    <!-- Activity heatmap -->
     <div class="ws-lawn-wrap" style="--ws-left: {{ $left }}px;">
       <svg class="ws-lawn" width="{{ $svgW }}" height="{{ $svgH }}"
            role="img" aria-label="Posting activity for last 6 months">
+
         <!-- Months -->
         <g class="ws-months" font-size="11">
           {{ $lastM := "" }}
@@ -102,11 +105,11 @@
           {{ end }}
         </g>
 
-        <!-- Weekdays (Sun top; labels at Mon(2), Wed(4), Fri(6)) -->
+        <!-- Weekdays (Sun on top; show labels at Mon(2)/Wed(4)/Fri(6)) -->
         <g class="ws-weekdays" text-anchor="end" font-size="11" dominant-baseline="middle">
-          <text x="{{ sub $left 8 }}" y="{{ add $top (add $step (div $cell 2)) }}">Mon</text>
-          <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 3 $step) (div $cell 2)) }}">Wed</text>
-          <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 5 $step) (div $cell 2)) }}">Fri</text>
+          <text x="{{ sub $left 8 }}" y="{{ add $top (add $step          (div $cell 2)) }}">Mon</text>
+          <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 3 $step)  (div $cell 2)) }}">Wed</text>
+          <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 5 $step)  (div $cell 2)) }}">Fri</text>
         </g>
 
         <!-- Cells -->
@@ -151,143 +154,7 @@
   </div>
 </section>
 
-<style>
-  /* subtitle ↔ metric(통계) 사이 여백 */
-  .ws-subtitle {
-    margin-bottom: 1.5rem;       /* 원하는 간격(기본 32px) */
-  }
-  @media (min-width: 768px) {
-    .ws-subtitle { margin-bottom: 2rem; }  /* 데스크톱에서 조금 더 */
-  }
-
-  /* 이미 .ws-stats--top 에도 margin-top이 있다면 겹치지 않도록 0으로 */
-  .ws-stats--top { margin-top: 0; }
-
-
-  /* layout */
-  .ws-center{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
-  .ws-lawn-wrap{ display:flex; justify-content:center; width:100%; margin-top:22px; }
-  .ws-lawn{ shape-rendering:crispEdges; transform: translateX(calc(-0.5 * var(--ws-left, 0px))); }
-  .ws-legend-row{ transform: translateX(calc(-0.5 * var(--ws-left, 0px))); }
-
-  /* labels */
-  .ws-month, .ws-weekdays, .ws-legend-label{ fill:var(--ws-muted,#6b7280); color:var(--ws-muted,#6b7280); }
-  :root[data-bs-theme="dark"] .ws-month,
-  :root[data-bs-theme="dark"] .ws-weekdays,
-  :root[data-bs-theme="dark"] .ws-legend-label{ fill:#94a3b8; color:#94a3b8; }
-
-  /* cells + palette */
-  .ws-cell{ fill:#e5e7eb; transition:transform .2s ease, fill .2s ease; transform-origin:center; }
-  .ws-cell:hover{ transform:scale(1.12); }
-  .ws-lv0{ fill:#e5e7eb; background:#e5e7eb; }
-  .ws-lv1{ fill:#dcfce7; background:#dcfce7; }
-  .ws-lv2{ fill:#86efac; background:#86efac; }
-  .ws-lv3{ fill:#22c55e; background:#22c55e; }
-  .ws-lv4{ fill:#15803d; background:#15803d; }
-  :root[data-bs-theme="dark"] .ws-lv0{ fill:#334155; background:#334155; }
-
-  /* legend */
-  .ws-legend-row{ display:flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; }
-  .ws-box{ width:9px; height:9px; border-radius:2px; display:inline-block; }
-
-  /* stats (no dividers; small, muted text; bigger top margin) */
-  .ws-stats{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); width:100%; max-width:860px; }
-  .ws-stats--top{ margin-top:44px; margin-bottom:12px; } /* 제목 ↔ 통계 더 넓게 */
-  .ws-metric{ border-left:0 !important; padding:10px 16px; text-align:center; }
-  .ws-metric__label{ font-size:12px; color:var(--ws-muted,#6b7280); }
-  .ws-metric__sub{   font-size:12px; color:var(--ws-muted,#6b7280); }
-  .ws-metric__value{ font-weight:800; font-size:26px; line-height:1.1; }
-  .ws-unit{ font-weight:700; font-size:.85em; opacity:.8; }
-  .ws-tags-big{ font-size:24px; font-weight:800; }
-  .ws-tag-sep{ opacity:.5; margin:0 .25rem; }
-
-  /* ===== Full-page minimal sprouts (only sprinkle, no header row) ===== */
-  #ws-sprinkle{
-    position:fixed; inset:0; pointer-events:none; z-index:1;
-    overflow:hidden;
-  }
-  .ws-floating-sprout{
-    position:absolute;
-    width: clamp(28px, 3.2vw, 42px);
-    height: clamp(28px, 3.2vw, 42px);
-    opacity:0;
-    transform-origin:bottom center;
-    animation:ws-fadePop 2000ms ease-out forwards;
-    filter: none; /* 더 또렷하게 */
-  }
-  .ws-floating-sprout img{ width:100%; height:100%; display:block; }
-  /* 다크모드에서도 선명하게 보이도록 약한 보정 */
-  :root[data-bs-theme="dark"] .ws-floating-sprout img{
-    filter: brightness(.98) saturate(1.05) contrast(1.05);
-  }
-
-  /* appear-hold-fade with very subtle drift (미니멀) */
-  @keyframes ws-fadePop{
-    0%   { opacity:0;   transform: translate(var(--dxStart,0), 8px)  scale(.75) rotate(var(--r,0deg)); }
-    18%  { opacity:1; transform: translate(0, 0)                 scale(1.02) rotate(var(--r,0deg)); }
-    70%  { opacity:1; transform: translate(var(--dx, 4px), -2px) scale(1.00) rotate(calc(var(--r,0deg) + 2deg)); }
-    100% { opacity:0;   transform: translate(var(--dxEnd,6px), -6px) scale(.98) rotate(calc(var(--r,0deg) + 4deg)); }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .ws-floating-sprout{ animation:none !important; opacity:.3 !important; }
-  }
-</style>
-
-<script>
-(function(){
-  const SEEDLING_SRC = "{{ $seedling }}";
-
-  /* ===== Minimal page-wide sprinkle only ===== */
-  function startSprinkle(){
-    const layer = document.getElementById('ws-sprinkle');
-    if (!layer) return;
-
-    const maxLive = 12;                   // 동시 새싹 최대 (낮을수록 미니멀)
-    let live = 0;
-
-    function spawn(){
-      if (document.hidden || live >= maxLive) return;
-      live++;
-
-      const n = document.createElement('div');
-      n.className = 'ws-floating-sprout';
-
-      // 랜덤 위치(전체 화면), 살짝 좌우로만 이동하도록 델타 지정
-      const vw = Math.random()*100;              // 0~100vw
-      const vh = 10 + Math.random()*75;          // 10~85vh
-      n.style.left = vw + 'vw';
-      n.style.top  = vh + 'vh';
-
-      const drift = (Math.random()*8 - 4).toFixed(1) + 'px'; // -4 ~ 4px
-      const drift2 = (Math.random()*10 - 5).toFixed(1) + 'px';
-      n.style.setProperty('--dx', drift);
-      n.style.setProperty('--dxEnd', drift2);
-      n.style.setProperty('--r', (Math.random()*6 - 3).toFixed(1) + 'deg');
-
-      const img = document.createElement('img');
-      img.src = SEEDLING_SRC; img.alt = 'seedling'; img.decoding='async';
-      n.appendChild(img);
-
-      n.addEventListener('animationend', () => { n.remove(); live--; }, {once:true});
-      layer.appendChild(n);
-    }
-
-    // 간격: 900~1400ms (너무 과하지 않게)
-    const id = setInterval(() => spawn(), 900 + Math.random()*500);
-    // 탭 비가시성 대응
-    document.addEventListener('visibilitychange', () => { /* no-op, spawn이 체크함 */ });
-    window.addEventListener('pagehide', () => clearInterval(id), { once:true });
-  }
-
-  const ready = () => { startSprinkle(); };
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', ready, { once:true });
-  } else { ready(); }
-})();
-</script>
-
 {{ end }}
 
 {{ define "sidebar-prefooter" }}{{ end }}
-{{ define "sidebar-footer" }}{{ end }}
+{{ define "sidebar-footer"  }}{{ end }}
