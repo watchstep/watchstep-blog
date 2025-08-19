@@ -36,3 +36,40 @@ code, pre, kbd, samp {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
                "Liberation Mono", "Courier New", monospace !important;
 }
+
+/* ===== ws lawn styles moved from inline to file (CSP safe) ===== */
+
+/* 레이아웃 */
+.ws-center{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
+.ws-lawn-wrap{ display:flex; justify-content:center; width:100%; margin-top:22px; --ws-left: 64px; }
+.ws-lawn{ shape-rendering:crispEdges; transform: translateX(calc(-0.5 * var(--ws-left))); }
+.ws-legend-row{ display:flex; align-items:center; gap:6px; margin-top:8px; font-size:12px;
+  transform: translateX(calc(-0.5 * var(--ws-left))); }
+
+/* 라벨 */
+.ws-month, .ws-weekdays, .ws-legend-label{ fill:var(--ws-muted,#6b7280); color:var(--ws-muted,#6b7280); }
+:root[data-bs-theme="dark"] .ws-month,
+:root[data-bs-theme="dark"] .ws-weekdays,
+:root[data-bs-theme="dark"] .ws-legend-label{ fill:#94a3b8; color:#94a3b8; }
+
+/* 셀 & 팔레트 */
+.ws-cell{ fill:#e5e7eb; transition:transform .2s ease, fill .2s ease; transform-origin:center; }
+.ws-cell:hover{ transform:scale(1.12); }
+.ws-lv0{ fill:#e5e7eb; background:#e5e7eb; }
+.ws-lv1{ fill:#dcfce7; background:#dcfce7; }
+.ws-lv2{ fill:#86efac; background:#86efac; }
+.ws-lv3{ fill:#22c55e; background:#22c55e; }
+.ws-lv4{ fill:#15803d; background:#15803d; }
+:root[data-bs-theme="dark"] .ws-lv0{ fill:#334155; background:#334155; }
+
+/* 범례 네모 */
+.ws-box{ width:9px; height:9px; border-radius:2px; display:inline-block; }
+
+/* 통계 박스(필요 시) */
+.ws-stats{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); width:100%; max-width:860px; }
+.ws-stats--top{ margin-top:44px; margin-bottom:16px; }
+.ws-metric{ border-left:0; padding:10px 16px; text-align:center; }
+.ws-metric__label,.ws-metric__sub{ font-size:12px; color:var(--ws-muted,#6b7280); }
+.ws-metric__value{ font-weight:800; font-size:26px; line-height:1.1; }
+.ws-tags-big{ font-size:24px; font-weight:800; }
+.ws-tag-sep{ opacity:.5; margin:0 .25rem; }
