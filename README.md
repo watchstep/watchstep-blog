@@ -43,18 +43,7 @@ npm run dev
 - Add images to `content/posts/my-post/images/`
 - Use `npm run dev` for live reload during writing
 
-## 🛠️ Makefile Commands
-
-```bash
-make help      # Show all commands
-make serve     # Start development server
-make build     # Build the site
-make deploy    # Deploy to GitHub
-make new-post  # Create a new blog post
-make clean     # Clean build files
-```
-
-## 🛠 Updating Doks Template
+## 🛠️ Updating Doks Template
 
 ```bash
 # Check & update to latest version

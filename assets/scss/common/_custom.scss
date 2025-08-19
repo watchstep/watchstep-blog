@@ -1,0 +1,38 @@
+/* 1) Pretendard Variable (전체 글리프 – 영/한 모두 사용) */
+@font-face {
+  font-family: "Pretendard Variable";
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/woff2/PretendardVariable.woff2")
+       format("woff2-variations");
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  /* unicode-range 제거 → 영/한 모두 커버 */
+}
+
+/* 2) 블로그 글 본문에만 Pretendard 적용 */
+.content,
+article,
+.post-content,
+.markdown,
+.docs-content,
+.entry-content {
+  font-family: "Pretendard Variable",
+               system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans",
+               "Apple SD Gothic Neo", "Malgun Gothic",
+               "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" !important;
+}
+
+/* 3) 제목/날짜/네비 등은 Jost 유지 */
+h1, h2, h3, h4, h5, h6,
+.display-1, .display-2, .display-3, .display-4,
+.page-title, .post-title, .article-title,
+.article-meta, .post-meta, .entry-meta, time,
+.navbar, .navbar-brand, .site-title {
+  font-family: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans" !important;
+}
+
+/* 4) 코드/모노스페이스는 그대로 */
+code, pre, kbd, samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+               "Liberation Mono", "Courier New", monospace !important;
+}

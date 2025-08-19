@@ -1,1 +1,15 @@
 // Put your custom SCSS variables here
+
+/* site accent color - green */
+$primary: #16a34a;          /* 버튼/링크 기본 강조 */
+$link-color-dark: #22c55e;  /* 다크모드 링크 톤 */
+$button-color-dark: #22c55e;
+:root, ::backdrop { --sl-color-accent-high: #16a34a; }
+
+/* Doks 폰트 스택: Jost 우선, 한글은 Pretendard로 폴백 */
+$font-family-sans-serif:
+  "Jost",
+  "Pretendard Variable",
+  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+  "Noto Sans", "Liberation Sans", Arial, sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
