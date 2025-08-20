@@ -1,0 +1,24 @@
+{{- $p := . -}}
+<div class="text-muted small d-flex align-items-center gap-3 flex-wrap">
+  <time datetime="{{ $p.Date }}">{{ $p.Date.Format "Jan 2, 2006" }}</time>
+
+  {{/* allow disable via showReadingTime: false */}}
+  {{- $showRT := true -}}
+  {{- if isset $p.Params "showReadingTime" -}}
+    {{- $showRT = $p.Params.showReadingTime -}}
+  {{- end -}}
+  {{- if $showRT -}}
+    <span>{{ $p.ReadingTime }} minute{{ if ne $p.ReadingTime 1 }}s{{ end }}</span>
+  {{- end -}}
+
+  {{- $contributors := $p.Params.contributors | default (slice) -}}
+  {{- if gt (len $contributors) 0 -}}
+    <span>•</span>
+    <span>
+      {{- range $i, $c := $contributors -}}
+        {{- if gt $i 0 }}, {{ end -}}
+        {{- $c -}}
+      {{- end -}}
+    </span>
+  {{- end -}}
+</div>

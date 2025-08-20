@@ -1,0 +1,25 @@
+{{- $ext := .Params.externalUrl -}}
+<article class="card h-100">
+  <div class="card-body">
+    <h3 class="h5 card-title">
+      <a class="stretched-link"
+         href="{{ if $ext }}{{ $ext }}{{ else }}{{ .RelPermalink }}{{ end }}"
+         {{ if $ext }}target="_blank" rel="noopener noreferrer nofollow"
+            aria-label="{{ .Title }} (opens in a new tab)"{{ end }}>
+        {{ .Title }}
+      </a>
+    </h3>
+
+    {{ with .Summary }}
+      <p class="card-text">{{ . }}</p>
+    {{ end }}
+
+    {{ with .Params.tags }}
+      <div class="small text-muted mt-2">
+        {{ range $i, $t := . -}}
+          {{- if gt $i 0 }} · {{ end -}}{{- $t -}}
+        {{- end }}
+      </div>
+    {{ end }}
+  </div>
+</article>

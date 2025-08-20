@@ -6,6 +6,6 @@ summary: "Post on Tistory"
 tags: ['Usage', 'Notion']
 showReadingTime: false
 _build:
-  render: "false"
-  list: "local"
+  render: never
+  list: local
 ---

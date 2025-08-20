@@ -1,10 +1,10 @@
 {{ define "main" }}
 
-{{/* ===== Title / Subtitle from content/_index.md ===== */}}
+{{/* Title/Subtitle: content/_index.md 의 title/lead 사용 */}}
 {{ $pageTitle := or .Title .Site.Title }}
 {{ $subtitle  := or .Params.lead (site.Params.home.subtitle | default "Step into AI & Development") }}
 
-{{/* ===== Heatmap window: last 6 months (26 weeks), Monday-aligned ===== */}}
+{{/* 6개월(26주) 윈도우 */}}
 {{ $now := now }}
 {{ $weeks := 26 }}
 {{ $oneDay := 86400 }}
@@ -14,9 +14,12 @@
 {{ $shift := index $wdmap $wdstr | default 0 }}
 {{ $start := sub $rawStart (mul $shift $oneDay) }}
 
-{{/* ===== Posts in window ===== */}}
-{{ $allPosts  := where .Site.RegularPages "Section" "in" (slice "blog" "posts") }}
-{{ $inWindow  := where $allPosts "Date.Unix" ">" $start }}
+{{/* ✅ RegularPages 대신 Pages 사용 → render: never 도 포함 */}}
+{{ $allPosts := where .Site.Pages "Section" "in" (slice "blog" "posts") }}
+{{ $allPosts = where $allPosts "Draft" "!=" true }}   {{/* 초안 제외(원하면 제거) */}}
+
+{{/* 윈도우 집계 */}}
+{{ $inWindow := where $allPosts "Date.Unix" ">" $start }}
 {{ $S := newScratch }}
 {{ range $p := $inWindow }}
   {{ $k := $p.Date.Format "2006-01-02" }}
@@ -24,16 +27,16 @@
   {{ $S.Set (printf "d.%s" $k) (add $prev 1) }}
 {{ end }}
 
-{{/* ===== Stats ===== */}}
+{{/* 통계 */}}
 {{ $totalPosts := len $allPosts }}
 {{ $thisMonth := $now.Format "2006-01" }}
 {{ $thisMonthCount := 0 }}
 {{ range $p := $allPosts }}{{ if eq ($p.Date.Format "2006-01") $thisMonth }}{{ $thisMonthCount = add $thisMonthCount 1 }}{{ end }}{{ end }}
 
+{{/* Top tags: 사이트 전체 태그 중, 현재 $allPosts 와 교집합만 카운트 */}}
 {{ $tagPairs := slice }}
 {{ range $name, $tax := .Site.Taxonomies.tags }}
-  {{ $p := where $tax.Pages "Section" "in" (slice "blog" "posts") }}
-  {{ $cnt := len $p }}
+  {{ $cnt := len (intersect $tax.Pages $allPosts) }}
   {{ if gt $cnt 0 }}{{ $tagPairs = $tagPairs | append (dict "tag" $name "count" $cnt) }}{{ end }}
 {{ end }}
 {{ $topTags := first 3 (sort $tagPairs "count" "desc") }}
@@ -41,26 +44,20 @@
 {{ $since := "" }}
 {{ with (first 1 (sort $allPosts "Date" "asc")) }}{{ $since = (index . 0).Date.Format "Jul 2, 2006" }}{{ end }}
 
-{{/* ===== Grid metrics ===== */}}
+{{/* 그리드 치수 */}}
 {{ $cell := 14 }}  {{ $gap := 4 }}  {{ $step := add $cell $gap }}
 {{ $left := 64 }}  {{ $top := 24 }}
 {{ $svgW := add $left (mul $weeks $step) }}
 {{ $svgH := add $top (mul 7 $step) }}
 
 <section class="section container py-4">
-
-  <!-- 페이지 전체 ‘새싹 스프링클’ 레이어 (외부 JS가 읽어감) -->
-  <div
-    id="ws-sprinkle"
-    aria-hidden="true"
-    data-seedling="{{ "images/seedling.png" | absURL }}">
-  </div>
+  <div id="ws-sprinkle" aria-hidden="true"
+       data-seedling="{{ "images/seedling.png" | absURL }}"></div>
 
   <div class="ws-center">
     <h1 class="display-4 fw-bold text-center m-0">{{ $pageTitle }}</h1>
     {{ with $subtitle }}<p class="lead text-muted text-center mt-1 ws-subtitle">{{ . }}</p>{{ end }}
 
-    <!-- Stats -->
     <div class="ws-stats ws-stats--top">
       <div class="ws-metric">
         <div class="ws-metric__label">Total posts</div>
@@ -76,14 +73,16 @@
         <div class="ws-metric__label">Top tags</div>
         <div class="ws-metric__value ws-tags-big">
           {{ if gt (len $topTags) 0 }}
-            {{ range $i, $it := $topTags }}{{ if gt $i 0 }}<span class="ws-tag-sep">·</span>{{ end }}<span class="ws-tag">#{{ $it.tag }}</span>{{ end }}
-          {{ else }}<span class="ws-tag">—</span>{{ end }}
+            {{ range $i, $it := $topTags }}
+              {{ if gt $i 0 }}<span class="ws-tag-sep">·</span>{{ end }}<span class="ws-tag">#{{ $it.tag }}</span>
+            {{ end }}
+          {{ else }}<span class="ws-tag">—</span>
+          {{ end }}
         </div>
         <div class="ws-metric__sub">across all posts</div>
       </div>
     </div>
 
-    <!-- Activity heatmap -->
     <div class="ws-lawn-wrap" style="--ws-left: {{ $left }}px;">
       <svg class="ws-lawn" width="{{ $svgW }}" height="{{ $svgH }}"
            role="img" aria-label="Posting activity for last 6 months">
@@ -103,7 +102,7 @@
           {{ end }}
         </g>
 
-        <!-- Weekdays (Sun on top; show labels at Mon(2)/Wed(4)/Fri(6)) -->
+        <!-- Weekdays (Sun top; labels at Mon/Wed/Fri rows) -->
         <g class="ws-weekdays" text-anchor="end" font-size="11" dominant-baseline="middle">
           <text x="{{ sub $left 8 }}" y="{{ add $top (add $step         (div $cell 2)) }}">Mon</text>
           <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 3 $step) (div $cell 2)) }}">Wed</text>
@@ -126,11 +125,10 @@
               {{ if ge $cnt 3 }}{{ $lvl = 3 }}{{ end }}
               {{ if ge $cnt 5 }}{{ $lvl = 4 }}{{ end }}
 
-              <rect
-                x="{{ add $left (mul (sub $w 1) $step) }}"
-                y="{{ add $top (mul (sub $d 1) $step) }}"
-                width="{{ sub $cell 2 }}" height="{{ sub $cell 2 }}"
-                rx="2" ry="2" class="ws-cell ws-lv{{ $lvl }}">
+              <rect x="{{ add $left (mul (sub $w 1) $step) }}"
+                    y="{{ add $top (mul (sub $d 1) $step) }}"
+                    width="{{ sub $cell 2 }}" height="{{ sub $cell 2 }}"
+                    rx="2" ry="2" class="ws-cell ws-lv{{ $lvl }}">
                 <title>{{ $key }} — {{ $cnt }} post{{ if ne $cnt 1 }}s{{ end }}</title>
               </rect>
             {{ end }}
@@ -139,7 +137,6 @@
       </svg>
     </div>
 
-    <!-- Legend -->
     <div class="ws-legend-row">
       <span class="ws-legend-label">Less</span>
       <span class="ws-box ws-lv0"></span>

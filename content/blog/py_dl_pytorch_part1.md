@@ -7,6 +7,6 @@ tags: ['Book', 'ML', 'Pytorch']
 contributors: []
 showReadingTime: false
 _build:
-  render: false
+  render: never
   list: local
 ---

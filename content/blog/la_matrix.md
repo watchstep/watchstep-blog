@@ -7,6 +7,6 @@ tags: ['Linear Algebra']
 contributors: []
 showReadingTime: false
 _build:
-  render: "false"
-  list: "local"
+  render: never
+  list: local
 ---

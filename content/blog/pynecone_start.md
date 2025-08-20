@@ -9,8 +9,6 @@ summary : "Pynecone 시작하기"
 
 ## **Pynecone이란? (그래도 React 종말은...)**
 
-{{< youtube 47BL6WLZJ1g >}}
-
 **특징 (공식 사이트** [https://pynecone.io/](https://pynecone.io/) **에서 말하는…)**
 
 - **Pure Python**
@@ -37,7 +35,7 @@ Pynecone 하나로  프론트엔드, 백엔드, 배포 다 할 수 있어요
 - Python 3.7버전 이상
 - NodeJS 12.22.0 버전 이상
 
-![Untitled](https://user-images.githubusercontent.com/88659167/230783615-aad3184a-0dc8-41c0-880d-715183c70d9d.png)
+<img src="https://user-images.githubusercontent.com/88659167/230783615-aad3184a-0dc8-41c0-880d-715183c70d9d.png" alt="Untitled" width="400" style="max-width:100%; height:auto;" />
 
 ************pip************를 통해 설치
 
@@ -51,9 +49,11 @@ pip install pynecone-io
 
 **<kbd>pc init</kbd> : Initialize a template app in new directory**
 
-![Untitled 1](https://user-images.githubusercontent.com/88659167/230783609-de0fc64b-e1ee-46a6-b57d-ae71fc353634.png)
+<img src="https://user-images.githubusercontent.com/88659167/230783609-de0fc64b-e1ee-46a6-b57d-ae71fc353634.png" alt="Untitled 1" width="500" style="max-width:100%; height:auto;" />
 
-![Untitled 2](https://user-images.githubusercontent.com/88659167/230783610-6c902c8b-d71b-46e4-9257-61c6587e29b3.png)
+<div style="height: 24px;"></div>
+
+<img src="https://user-images.githubusercontent.com/88659167/230783610-6c902c8b-d71b-46e4-9257-61c6587e29b3.png" alt="Untitled 2" width="250" style="max-width:100%; height:auto;" />
 
 위와 같이 기본 템플릿을 생성해줌
 
@@ -106,11 +106,13 @@ app에 관한 configuration 관한 파일임.
 pc run
 ```
 
-![Untitled 3](https://user-images.githubusercontent.com/88659167/230783611-b3926416-ebc1-4ce1-bb2a-c4b07b3afd62.png)
+<img src="https://user-images.githubusercontent.com/88659167/230783611-b3926416-ebc1-4ce1-bb2a-c4b07b3afd62.png" alt="Untitled 3" width="600" height="250"/>
 
 [http://localhost:3000/](http://localhost:3000/)
 
-![Untitled 4](https://user-images.githubusercontent.com/88659167/230783613-b97edc49-042e-4bd8-b65b-a03d546cdc80.png)
+<div style="height: 24px;"></div>
+
+<img src="https://user-images.githubusercontent.com/88659167/230783613-b97edc49-042e-4bd8-b65b-a03d546cdc80.png" alt="Pynecone 앱 화면" width="600" style="max-width:100%; height:auto;" />
 
 ### 4. The Structure of a Pynecone App
 
@@ -167,14 +169,13 @@ app.compile()
 
 ## My first pynecone app
 
-![Untitled 5](https://user-images.githubusercontent.com/88659167/230783614-90f21437-8b72-47e2-b185-8b612e0fcaa3.png)
+<img src="https://user-images.githubusercontent.com/88659167/230783614-90f21437-8b72-47e2-b185-8b612e0fcaa3.png" alt="Untitled 5" width="600"/>
 
-### **Reference**
+### Reference
 
-- **Pynecone** : [https://pynecone.io/](https://pynecone.io/)
-- **Pynecone Example APP** : https://github.com/pynecone-io/pynecone-examples
-- **reddit에 pynecone 개발진이 직접 작성한 글 :**
-[https://martinii.fun/397](https://martinii.fun/397)
-- [https://www.reddit.com/r/Python/comments/10h6l7e/pynecone_new_features_and_performance_improvements/](https://www.reddit.com/r/Python/comments/10h6l7e/pynecone_new_features_and_performance_improvements/)
-- [https://dalle.pynecone.app/](https://dalle.pynecone.app/)
-- [https://www.reddit.com/r/Python/comments/zh0pmy/pynecone_web_apps_in_pure_python/](https://www.reddit.com/r/Python/comments/zh0pmy/pynecone_web_apps_in_pure_python/)
+- [Pynecone 공식 사이트](https://pynecone.io/)
+- [예제 앱 모음](https://github.com/pynecone-io/pynecone-examples)
+- [개발진 글](https://martinii.fun/397)
+- [Reddit: 기능/성능 개선](https://www.reddit.com/r/Python/comments/10h6l7e/pynecone_new_features_and_performance_improvements/)
+- [Reddit: Pure Python 웹앱](https://www.reddit.com/r/Python/comments/zh0pmy/pynecone_web_apps_in_pure_python/)
+- [DALL·E 데모](https://dalle.pynecone.app/)

@@ -16,4 +16,8 @@ seo:
   description: "" # custom description (recommended)
   canonical: "" # custom canonical URL (optional)
   robots: "" # custom robot tags (optional)
+cascade:
+  - _target:
+      kind: page
+    contributors: []
 ---
