@@ -3,7 +3,7 @@ title: "📝 Gradient Descent란?"
 date: 2023-03-08T15:34:47+09:00
 summary: 남세동 대표님의 딥러닝 인터뷰 질문에 대한 답변 모음
 draft: true
-tags: ['DL', 'Interview']
+tags: ['dl', 'interview']
 contributors: []
 ---
 ## Gradient Descent란?

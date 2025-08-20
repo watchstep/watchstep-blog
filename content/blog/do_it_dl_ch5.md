@@ -1,11 +1,11 @@
 ---
 title: "📗 Do it! 딥러닝입문 5장 : Training Tips"
 date: 2022-07-26
-externalUrl: "https://takeheed.tistory.com/15"
+externalurl: "https://takeheed.tistory.com/15"
 summary: "Post on Tistory"
-tags: ['Book', 'ML']
+tags: ['book', 'ml']
 contributors: []
-showReadingTime: false'
+showreadingtime: false'
 _build:
   render: never
   list: local

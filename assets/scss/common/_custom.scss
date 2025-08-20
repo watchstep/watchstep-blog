@@ -65,19 +65,80 @@ code, pre, kbd, samp {
 /* 범례 네모 */
 .ws-box{ width:9px; height:9px; border-radius:2px; display:inline-block; }
 
-/* 통계 박스(필요 시) */
-.ws-stats{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); width:100%; max-width:860px; }
-.ws-stats--top{ margin-top:44px; margin-bottom:16px; }
-.ws-metric{ border-left:0; padding:10px 16px; text-align:center; }
-.ws-metric__label,.ws-metric__sub{ font-size:12px; color:var(--ws-muted,#6b7280); }
-.ws-metric__value{ font-weight:800; font-size:26px; line-height:1.1; }
-.ws-tags-big{ font-size:24px; font-weight:800; }
-.ws-tag-sep{ opacity:.5; margin:0 .25rem; }
+.ws-stats{
+  /* 3등분, 가운데 모으기 */
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 280px));
+  justify-content:center;             /* 가운데 정렬 */
+  column-gap:48px;                    /* 칼럼 간격 */
+  row-gap:8px;
+  align-items:stretch;                 /* 3칸 높이 동일 */
+}
+
+.ws-metric{
+  /* 수직 가운데 정렬 + 동일한 내부 배치 */
+  display:flex;
+  flex-direction:column;
+  align-items:center;                  /* 텍스트 가운데 */
+  justify-content:center;
+  text-align:center;
+  min-height:88px;                     /* 높이 통일로 깔끔 */
+  gap:.25rem;
+}
+
+.ws-metric__label{
+  font-size:12px;
+  color:var(--ws-muted,#6b7280);
+  margin-bottom:.15rem;
+}
+.ws-metric__value{
+  font-weight:800;
+  font-size:28px;
+  line-height:1.1;
+  letter-spacing:-.01em;
+  /* 숫자 폭을 일정하게 → 수치가 깔끔하게 보임 */
+  font-variant-numeric: tabular-nums lining-nums;
+  -webkit-font-feature-settings: "tnum" 1, "lnum" 1;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+.ws-unit{ font-weight:700; font-size:.85em; opacity:.85; }
+
+.ws-metric__sub{
+  font-size:12px;
+  color:var(--ws-muted,#6b7280);
+  margin-top:.1rem;
+}
+
+/* Top tags 모양/정렬 */
+.ws-tags-big{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.35rem;
+  flex-wrap:wrap;
+}
+.ws-tag{
+  display:inline-block;
+  padding:.10rem .38rem;
+  font-size:0.98em;
+  border-radius:999px;
+  background:var(--ws-chip-bg, #f3f4f6);
+}
+:root[data-bs-theme="dark"] .ws-tag{
+  background:#0f172a;
+}
+
+/* 모바일에서 1열로, 간격 조금 넉넉하게 */
+@media (max-width: 720px){
+  .ws-stats{ grid-template-columns:1fr; row-gap:18px; }
+  .ws-metric{ min-height:auto; }
+}
 
 #ws-sprinkle{ position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
 .ws-floating-sprout{
   position:absolute;
-  width:clamp(28px,3.2vw,46px); height:clamp(28px,3.2vw,46px);
+  width:clamp(34px,3.8vw,56px);
+  height:clamp(34px,3.8vw,56px);
   opacity:0; transform-origin:bottom center;
   animation:ws-fadePop 2000ms ease-out forwards;
 }

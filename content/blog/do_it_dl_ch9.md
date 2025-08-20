@@ -1,11 +1,11 @@
 ---
 title: "📗 Do it! 딥러닝입문 9장 : RNN"
 date: 2022-08-15
-externalUrl: "https://takeheed.tistory.com/20"
+externalurl: "https://takeheed.tistory.com/20"
 summary: "Post on Tistory"
-tags: ['Book', 'ML']
+tags: ['book', 'ml']
 contributors: []
-showReadingTime: false
+showreadingtime: false
 _build:
   render: never
   list: local

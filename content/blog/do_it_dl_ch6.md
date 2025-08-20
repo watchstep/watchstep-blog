@@ -1,11 +1,11 @@
 ---
 title: "📗 Do it! 딥러닝입문 6장 : Multi-Layer Neural Networks"
 date: 2022-08-01
-externalUrl: "https://takeheed.tistory.com/17"
+externalurl: "https://takeheed.tistory.com/17"
 summary: "Post on Tistory"
-tags: ['Book', 'ML']
+tags: ['book', 'ml']
 contributors: []
-showReadingTime: false
+showreadingtime: false
 _build:
   render: never
   list: local

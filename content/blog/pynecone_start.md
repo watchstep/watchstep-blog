@@ -2,7 +2,7 @@
 title: "🌳 Pynecone 시작하기 (Python으로 웹앱 만들기)"
 date: 2023-04-10T01:57:05+09:00
 draft: false
-tags: ['Pynecone']
+tags: ['pynecone']
 contributors: []
 summary : "Pynecone 시작하기"
 ---

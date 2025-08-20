@@ -1,10 +1,10 @@
 {{ define "main" }}
 
-{{/* Title/Subtitle: content/_index.md 의 title/lead 사용 */}}
+{{/* 제목/부제목: content/_index.md 사용 */}}
 {{ $pageTitle := or .Title .Site.Title }}
-{{ $subtitle  := or .Params.lead (site.Params.home.subtitle | default "Step into AI & Development") }}
+{{ $subtitle  := or .Params.lead (site.Params.home.subtitle | default "Step into AI & development.") }}
 
-{{/* 6개월(26주) 윈도우 */}}
+{{/* 6개월 윈도우 */}}
 {{ $now := now }}
 {{ $weeks := 26 }}
 {{ $oneDay := 86400 }}
@@ -14,39 +14,43 @@
 {{ $shift := index $wdmap $wdstr | default 0 }}
 {{ $start := sub $rawStart (mul $shift $oneDay) }}
 
-{{/* ✅ RegularPages 대신 Pages 사용 → render: never 도 포함 */}}
-{{ $allPosts := where .Site.Pages "Section" "in" (slice "blog" "posts") }}
-{{ $allPosts = where $allPosts "Draft" "!=" true }}   {{/* 초안 제외(원하면 제거) */}}
+{{ $blog := site.GetPage "section" "blog" }}
+{{ $allPosts := cond $blog $blog.RegularPagesRecursive (slice) }}
+{{ $allPosts = where $allPosts "Draft" "!=" true }}
 
-{{/* 윈도우 집계 */}}
-{{ $inWindow := where $allPosts "Date.Unix" ">" $start }}
+{{/* 날짜별 카운트 */}}
 {{ $S := newScratch }}
-{{ range $p := $inWindow }}
+{{ range $p := where $allPosts "Date.Unix" ">" $start }}
   {{ $k := $p.Date.Format "2006-01-02" }}
-  {{ $prev := $S.Get (printf "d.%s" $k) | default 0 }}
-  {{ $S.Set (printf "d.%s" $k) (add $prev 1) }}
+  {{ $S.Set (printf "d.%s" $k) (add 1 ($S.Get (printf "d.%s" $k) | default 0)) }}
 {{ end }}
 
-{{/* 통계 */}}
+{{/* 통계 값 */}}
 {{ $totalPosts := len $allPosts }}
 {{ $thisMonth := $now.Format "2006-01" }}
-{{ $thisMonthCount := 0 }}
-{{ range $p := $allPosts }}{{ if eq ($p.Date.Format "2006-01") $thisMonth }}{{ $thisMonthCount = add $thisMonthCount 1 }}{{ end }}{{ end }}
+{{ $thisMonthCount := len (where $allPosts "Date.Format" "2006-01" $thisMonth) }}
 
-{{/* Top tags: 사이트 전체 태그 중, 현재 $allPosts 와 교집합만 카운트 */}}
-{{ $tagPairs := slice }}
-{{ range $name, $tax := .Site.Taxonomies.tags }}
-  {{ $cnt := len (intersect $tax.Pages $allPosts) }}
-  {{ if gt $cnt 0 }}{{ $tagPairs = $tagPairs | append (dict "tag" $name "count" $cnt) }}{{ end }}
+{{/* 상위 태그 Top3: allPosts 에서 직접 집계 */}}
+{{ $tagCount := dict }}
+{{ range $p := $allPosts }}
+  {{ with $p.Params.tags }}
+    {{ range . }}
+      {{ $k := printf "%v" . }}
+      {{ $tagCount = merge $tagCount (dict $k (add 1 (index $tagCount $k | default 0))) }}
+    {{ end }}
+  {{ end }}
 {{ end }}
-{{ $topTags := first 3 (sort $tagPairs "count" "desc") }}
+{{/* dict → (tag,count) slice 로 변환 후 정렬 */}}
+{{ $pairs := slice }}
+{{ range $k, $v := $tagCount }}{{ $pairs = $pairs | append (dict "tag" $k "count" $v) }}{{ end }}
+{{ $topTags := first 3 (sort $pairs "count" "desc") }}
 
 {{ $since := "" }}
 {{ with (first 1 (sort $allPosts "Date" "asc")) }}{{ $since = (index . 0).Date.Format "Jul 2, 2006" }}{{ end }}
 
-{{/* 그리드 치수 */}}
-{{ $cell := 14 }}  {{ $gap := 4 }}  {{ $step := add $cell $gap }}
-{{ $left := 64 }}  {{ $top := 24 }}
+{{/* grid sizes */}}
+{{ $cell := 14 }} {{ $gap := 4 }} {{ $step := add $cell $gap }}
+{{ $left := 64 }} {{ $top := 24 }}
 {{ $svgW := add $left (mul $weeks $step) }}
 {{ $svgH := add $top (mul 7 $step) }}
 
@@ -56,7 +60,7 @@
 
   <div class="ws-center">
     <h1 class="display-4 fw-bold text-center m-0">{{ $pageTitle }}</h1>
-    {{ with $subtitle }}<p class="lead text-muted text-center mt-1 ws-subtitle">{{ . }}</p>{{ end }}
+    {{ with $subtitle }}<p class="lead text-muted text-center mt-2 mb-0 ws-subtitle">{{ . }}</p>{{ end }}
 
     <div class="ws-stats ws-stats--top">
       <div class="ws-metric">
@@ -74,20 +78,17 @@
         <div class="ws-metric__value ws-tags-big">
           {{ if gt (len $topTags) 0 }}
             {{ range $i, $it := $topTags }}
-              {{ if gt $i 0 }}<span class="ws-tag-sep">·</span>{{ end }}<span class="ws-tag">#{{ $it.tag }}</span>
+              {{ if gt $i 0 }}<span class="ws-tag-sep">·</span>{{ end }}
+              <span class="ws-tag">#{{ $it.tag }}</span>
             {{ end }}
-          {{ else }}<span class="ws-tag">—</span>
-          {{ end }}
+          {{ else }}<span class="ws-tag">—</span>{{ end }}
         </div>
         <div class="ws-metric__sub">across all posts</div>
       </div>
     </div>
 
     <div class="ws-lawn-wrap" style="--ws-left: {{ $left }}px;">
-      <svg class="ws-lawn" width="{{ $svgW }}" height="{{ $svgH }}"
-           role="img" aria-label="Posting activity for last 6 months">
-
-        <!-- Months -->
+      <svg class="ws-lawn" width="{{ $svgW }}" height="{{ $svgH }}" role="img">
         <g class="ws-months" font-size="11">
           {{ $lastM := "" }}
           {{ range $w := seq $weeks }}
@@ -102,14 +103,12 @@
           {{ end }}
         </g>
 
-        <!-- Weekdays (Sun top; labels at Mon/Wed/Fri rows) -->
         <g class="ws-weekdays" text-anchor="end" font-size="11" dominant-baseline="middle">
-          <text x="{{ sub $left 8 }}" y="{{ add $top (add $step         (div $cell 2)) }}">Mon</text>
+          <text x="{{ sub $left 8 }}" y="{{ add $top (add $step (div $cell 2)) }}">Mon</text>
           <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 3 $step) (div $cell 2)) }}">Wed</text>
           <text x="{{ sub $left 8 }}" y="{{ add $top (add (mul 5 $step) (div $cell 2)) }}">Fri</text>
         </g>
 
-        <!-- Cells -->
         <g class="ws-cells">
           {{ range $w := seq $weeks }}
             {{ $colBase := add $start (mul (mul (sub $w 1) 7) $oneDay) }}

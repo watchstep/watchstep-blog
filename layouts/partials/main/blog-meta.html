@@ -1,24 +1,53 @@
-{{- $p := . -}}
-<div class="text-muted small d-flex align-items-center gap-3 flex-wrap">
-  <time datetime="{{ $p.Date }}">{{ $p.Date.Format "Jan 2, 2006" }}</time>
+{{/* Doks 기본 메타를 유지하되, 읽기시간은 조건부로 */}}
+{{ $last := sub (len .Params.contributors) 1 }}
+{{ $ext := (or .Params.externalurl .Params.externalUrl) | default "" }}
+{{ $hideRT := or (not (default true (.Param "showReadingTime"))) (ne $ext "") }}
 
-  {{/* allow disable via showReadingTime: false */}}
-  {{- $showRT := true -}}
-  {{- if isset $p.Params "showReadingTime" -}}
-    {{- $showRT = $p.Params.showReadingTime -}}
-  {{- end -}}
-  {{- if $showRT -}}
-    <span>{{ $p.ReadingTime }} minute{{ if ne $p.ReadingTime 1 }}s{{ end }}</span>
-  {{- end -}}
+<p>
+  <small>
+    {{- time.Format (default ":date_long" .Site.Params.dateFormat) .PublishDate -}}
 
-  {{- $contributors := $p.Params.contributors | default (slice) -}}
-  {{- if gt (len $contributors) 0 -}}
-    <span>•</span>
-    <span>
-      {{- range $i, $c := $contributors -}}
-        {{- if gt $i 0 }}, {{ end -}}
-        {{- $c -}}
-      {{- end -}}
-    </span>
-  {{- end -}}
-</div>
+    {{- with .Params.categories -}}
+      &nbsp;{{ i18n "in" }}&nbsp;
+      {{- range $index, $category := . -}}
+        {{ if gt $index 0 }}, {{ end -}}
+        <a class="stretched-link position-relative link-muted"
+           href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+      {{- end }}
+    {{- end }}
+
+    {{- with .Params.contributors -}}
+      &nbsp;{{ i18n "by" }}&nbsp;
+      {{- range $index, $contributor := . -}}
+        {{- if gt $index 0 }}{{ if eq $index $last }} and {{ else }}, {{ end }}{{ end -}}
+        {{- with $.Site.GetPage "taxonomyTerm" (printf "contributors/%s" (urlize .)) -}}
+          {{ if $.Params.avatar -}}
+            {{ $image := .Resources.GetMatch (printf "**%s" .Params.avatar) -}}
+            {{ $imageLq := $image.Resize "15x15 webp q95" -}}
+            {{ $image = $image.Resize "60x60 webp q95" -}}
+            <img class="rounded-circle w-auto mx-1 lazyload blur-up"
+                 src="{{ $imageLq.RelPermalink }}" data-src="{{ $image.RelPermalink }}"
+                 alt="{{ .Title }}" width="30" height="30">
+          {{- end }}
+        {{- end -}}
+        <a class="stretched-link position-relative"
+           href="{{ "/contributors/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+      {{- end }}
+    {{- end -}}
+
+    {{- /* 읽기시간은 showReadingTime=false 이거나 externalUrl이면 숨김 */ -}}
+    {{- if not $hideRT -}}
+      <span class="stretched-link position-relative reading-time text-nowrap"
+            title="{{ i18n "reading_time" }}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock"
+             width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+          <path d="M12 7v5l3 3"></path>
+        </svg>
+        {{- .ReadingTime }}&nbsp;{{ i18n "minute" .ReadingTime -}}
+      </span>
+    {{- end -}}
+  </small>
+</p>
