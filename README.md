@@ -79,19 +79,3 @@ node_modules/    # Dependencies
 
 ---
 
-in the given set of materials, the reading passage and the lecture deal with () to debate whether ()
-The reading passage provides three pieces of evidecne to prove its point, whereas the professor argues against it by providing three compelling rebuttals
-
-The reading passage asserts the ideat that
-The professor casts doubt because
-
-The reading claims that
-The professor refutres the idea because
-
-The reading points out that
-The professor challenges the idea because
-
-In the given set of materials, the reading passage and the lecture deal with 큰 주제 to debate whether 무엇을 토론하는지
-
-The reading passage provides three pieces of evidences to prove its point, whereas the professor argues against it by providing three compelling rebuttals.
-
