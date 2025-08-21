@@ -23,7 +23,7 @@ copyRight = "© 2025 watchstep"
   enable = true
 
 [outputs]
-  home = ["HTML", "RSS", "searchIndex"]
+  home = ["HTML", "RSS", "searchIndex", "ROBOTS"]
   section = ["HTML", "RSS", "SITEMAP"]
 
 [outputFormats.searchIndex]
