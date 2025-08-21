@@ -1,6 +1,6 @@
 title = "Watchstep Blog"
 baseURL = "https://blog.watchstep.me/"
-canonifyURLs = true # convert relative links to absolute URLs
+canonifyURLs = false
 relativeURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
@@ -24,8 +24,8 @@ copyRight = "© 2025 watchstep"
   enable = true
 
 [outputs]
-  home = ["HTML", "RSS", "searchIndex", "ROBOTS"]
-  section = ["HTML", "RSS", "SITEMAP"]
+  home = ["HTML", "RSS", "searchIndex", "ROBOTS", "Sitemap"]
+  section = ["HTML", "RSS"]
 
 [outputFormats.searchIndex]
   mediaType = "application/json"
