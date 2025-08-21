@@ -1,6 +1,7 @@
 title = "Watchstep Blog"
 baseURL = "https://blog.watchstep.me/"
 canonifyURLs = true # convert relative links to absolute URLs
+relativeURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
 # disableKinds = ["taxonomy", "term"]
