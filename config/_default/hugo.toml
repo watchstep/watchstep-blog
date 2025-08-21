@@ -18,7 +18,7 @@ defaultContentLanguage = "en"
 disableLanguages = ["de", "nl"]
 defaultContentLanguageInSubdir = false
 
-copyRight = "© 2025 watchstep"
+copyRight = "Â©Â 2025 watchstep"
 
 [build.buildStats]
   enable = true
@@ -34,13 +34,13 @@ copyRight = "© 2025 watchstep"
   notAlternative = true
 
 # Add output format for section sitemap.xml
-[outputFormats.SITEMAP]
-  mediaType = "application/xml"
-  baseName = "sitemap"
-  isHTML = false
-  isPlainText = true
-  noUgly = true
-  rel  = "sitemap"
+#[outputFormats.SITEMAP]
+#  mediaType = "application/xml"
+#  baseName = "sitemap"
+#  isHTML = false
+#  isPlainText = true
+#  noUgly = true
+#  rel  = "sitemap"
 
 [sitemap]
   changefreq = "weekly"
