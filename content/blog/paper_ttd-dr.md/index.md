@@ -4,7 +4,7 @@ description: "Test-Time Diffusion Deep Research"
 summary: "인간의 연구 과정에서 영감을 받아 Diffusion 방식으로 발전한 AI Deep Research Agent"
 date: 2025-08-22T10:49:00+09:00
 lastmod: 2025-08-22T10:49:00+09:00
-draft: true
+draft: false
 weight: 50
 categories: []
 tags: ["paper", "LLM", "ai research agent", "test-time scaling"]
