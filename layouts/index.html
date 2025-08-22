@@ -1,36 +1,49 @@
 {{ define "main" }}
 
-{{/* 제목/부제목: content/_index.md 사용 */}}
+{{/* 제목/부제목 */}}
 {{ $pageTitle := or .Title .Site.Title }}
 {{ $subtitle  := or .Params.lead (site.Params.home.subtitle | default "Step into AI & development.") }}
 
-{{/* 6개월 윈도우 */}}
+{{/* ───────── 6개월(26주) 윈도우: 이번 주(월요일) 기준 + 자정 정규화 ───────── */}}
 {{ $now := now }}
 {{ $weeks := 26 }}
 {{ $oneDay := 86400 }}
-{{ $rawStart := sub $now.Unix (mul (mul $weeks 7) $oneDay) }}
-{{ $wdstr := dateFormat "Mon" (time $rawStart) }}
 {{ $wdmap := dict "Mon" 0 "Tue" 1 "Wed" 2 "Thu" 3 "Fri" 4 "Sat" 5 "Sun" 6 }}
-{{ $shift := index $wdmap $wdstr | default 0 }}
-{{ $start := sub $rawStart (mul $shift $oneDay) }}
 
+{{/* 이번 주 월요일(week start) */}}
+{{ $shiftNow := index $wdmap (dateFormat "Mon" $now) | default 0 }}
+{{ $startOfThisWeek := sub $now.Unix (mul $shiftNow $oneDay) }}
+
+{{/* 히트맵은 "이번 주"를 마지막 열로 두고, 과거로 (26-1)주 */}}
+{{ $start := sub $startOfThisWeek (mul (mul (sub $weeks 1) 7) $oneDay) }}
+
+{{/* 자정(UTC) 정규화 → DST/타임존 드리프트 제거 */}}
+{{ $start = mul (div $start $oneDay) $oneDay }}
+
+{{/* 블로그 글 */}}
 {{ $blog := site.GetPage "section" "blog" }}
 {{ $allPosts := cond $blog $blog.RegularPagesRecursive (slice) }}
 {{ $allPosts = where $allPosts "Draft" "!=" true }}
 
-{{/* 날짜별 카운트 */}}
+{{/* 날짜별 카운트(히트맵): 에포크 '일' 키로 집계 */}}
 {{ $S := newScratch }}
 {{ range $p := where $allPosts "Date.Unix" ">" $start }}
-  {{ $k := $p.Date.Format "2006-01-02" }}
-  {{ $S.Set (printf "d.%s" $k) (add 1 ($S.Get (printf "d.%s" $k) | default 0)) }}
+  {{ $dayKey := div $p.Date.Unix $oneDay }}  {{/* floor(unix/86400) */}}
+  {{ $S.Set (printf "d.%d" $dayKey) (add 1 ($S.Get (printf "d.%d" $dayKey) | default 0)) }}
 {{ end }}
 
-{{/* 통계 값 */}}
+{{/* 통계 */}}
 {{ $totalPosts := len $allPosts }}
 {{ $thisMonth := $now.Format "2006-01" }}
-{{ $thisMonthCount := len (where $allPosts "Date.Format" "2006-01" $thisMonth) }}
+{{ $SC := newScratch }}{{ $SC.Set "mcount" 0 }}
+{{ range $p := $allPosts }}
+  {{ if eq ($p.Date.Format "2006-01") $thisMonth }}
+    {{ $SC.Set "mcount" (add ($SC.Get "mcount") 1) }}
+  {{ end }}
+{{ end }}
+{{ $thisMonthCount := $SC.Get "mcount" }}
 
-{{/* 상위 태그 Top3: allPosts 에서 직접 집계 */}}
+{{/* 상위 태그 Top3 */}}
 {{ $tagCount := dict }}
 {{ range $p := $allPosts }}
   {{ with $p.Params.tags }}
@@ -40,7 +53,6 @@
     {{ end }}
   {{ end }}
 {{ end }}
-{{/* dict → (tag,count) slice 로 변환 후 정렬 */}}
 {{ $pairs := slice }}
 {{ range $k, $v := $tagCount }}{{ $pairs = $pairs | append (dict "tag" $k "count" $v) }}{{ end }}
 {{ $topTags := first 3 (sort $pairs "count" "desc") }}
@@ -115,14 +127,16 @@
             {{ range $d := seq 7 }}
               {{ $u := add $colBase (mul (sub $d 1) $oneDay) }}
               {{ $dt := time $u }}
-              {{ $key := $dt.Format "2006-01-02" }}
-              {{ $cnt := $S.Get (printf "d.%s" $key) | default 0 }}
 
+              {{/* 셀 조회도 에포크 '일' 키로 */}}
+              {{ $uday := div $u $oneDay }}
+              {{ $cnt := $S.Get (printf "d.%d" $uday) | default 0 }}
+              {{ $key := $dt.Format "2006-01-02" }}  {{/* tooltip */}}
+
+              {{/* ── 3단계 팔레트: 0 / 1 / 2+  ── */}}
               {{ $lvl := 0 }}
-              {{ if ge $cnt 1 }}{{ $lvl = 1 }}{{ end }}
-              {{ if ge $cnt 2 }}{{ $lvl = 2 }}{{ end }}
-              {{ if ge $cnt 3 }}{{ $lvl = 3 }}{{ end }}
-              {{ if ge $cnt 5 }}{{ $lvl = 4 }}{{ end }}
+              {{ if ge $cnt 1 }}{{ $lvl = 3 }}{{ end }}  {{/* 1개 → lv3(중간색) */}}
+              {{ if ge $cnt 2 }}{{ $lvl = 4 }}{{ end }}  {{/* 2개+ → lv4(진한색) */}}
 
               <rect x="{{ add $left (mul (sub $w 1) $step) }}"
                     y="{{ add $top (mul (sub $d 1) $step) }}"
@@ -139,8 +153,6 @@
     <div class="ws-legend-row">
       <span class="ws-legend-label">Less</span>
       <span class="ws-box ws-lv0"></span>
-      <span class="ws-box ws-lv1"></span>
-      <span class="ws-box ws-lv2"></span>
       <span class="ws-box ws-lv3"></span>
       <span class="ws-box ws-lv4"></span>
       <span class="ws-legend-label">More</span>

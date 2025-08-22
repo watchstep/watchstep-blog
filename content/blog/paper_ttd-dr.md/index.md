@@ -33,7 +33,7 @@ Google Cloud AI Research팀이 인간의 연구 과정을 모방한 혁신적인
 
 ## AI가 진짜 연구자처럼 생각할 수 있을까?
 
-<img width="127" height="102" alt="Image" src="https://github.com/user-attachments/assets/0775522a-767a-4820-a51c-8d06747d81af" />
+<img width="180" height="145" alt="Image" src="https://github.com/user-attachments/assets/0775522a-767a-4820-a51c-8d06747d81af" />
 
 최근 ChatGPT, Claude 같은 대형 언어 모델들이 단순한 질문답변을 넘어 복잡한 연구 작업까지 수행하기 시작했다. 하지만 여전히 한계가 명확하다. 특히 **Deep Research** 작업-여러 단계의 정보 수집, 분석, 종합이 필요한 고차원적 연구-에서는 성능이 급격히 떨어진다.
 
@@ -45,7 +45,7 @@ Google의 연구팀은 바로 이 점에 주목했다. 과연 AI도 인간처럼
 
 ### 현재 Deep Research 에이전트의 한계
 
-<img width="326" height="126" alt="Image" src="https://github.com/user-attachments/assets/df0a47ee-a9a6-4832-9501-c39a1b6d6a37" />
+<img width="400" height="155" alt="Image" src="https://github.com/user-attachments/assets/df0a47ee-a9a6-4832-9501-c39a1b6d6a37" />
 
 OpenAI Deep Research, Perplexity Deep Research, Grok DeepSearch 등  기존의 Deep Research Agents은 대부분 **Chain-of-Thought**, **Monte Carlo Tree Search**, **self-refinement** 같은 test-time scaling 기법들을 조합해서 만들어졌다.
 
@@ -102,7 +102,7 @@ TTD-DR의 핵심 아이디어는 **연구 보고서 생성을 diffusion 과정�
 
 ### Backbone Deep Research Agent
 
-<img width="253" height="49" alt="Image" src="https://github.com/user-attachments/assets/4a117607-e002-4455-91be-db46f76c323a" />
+<img width="320" height="62" alt="Image" src="https://github.com/user-attachments/assets/4a117607-e002-4455-91be-db46f76c323a" />
 
 TTD-DR의 기본 구조는 3단계로 구성된다:
 
@@ -125,7 +125,7 @@ TTD-DR의 기본 구조는 3단계로 구성된다:
 
 ### Component-wise Self-Evolution
 
-<img width="295" height="109" alt="Image" src="https://github.com/user-attachments/assets/b8da7ef2-e2fd-40d2-b083-1b43f9f6c921" />
+<img width="370" height="137" alt="Image" src="https://github.com/user-attachments/assets/b8da7ef2-e2fd-40d2-b083-1b43f9f6c921" />
 
 각 단계의 에이전트 성능을 개별적으로 향상시키는 알고리즘:
 
@@ -140,7 +140,7 @@ TTD-DR의 기본 구조는 3단계로 구성된다:
 
 diffusion model의 sampling 과정에서 영감을 받은 핵심 알고리즘
 
-<img width="326" height="92" alt="Image" src="https://github.com/user-attachments/assets/e08c2553-94de-4c09-80b2-40fc3c6a391e" />
+<img width="400" height="113" alt="Image" src="https://github.com/user-attachments/assets/e08c2553-94de-4c09-80b2-40fc3c6a391e" />
 
 - preliminary draft를 “noisy” 시작점으로 설정
 - iterative refinement를 통해 점진적으로 품질 향상
@@ -175,9 +175,9 @@ diffusion model의 sampling 과정에서 영감을 받은 핵심 알고리즘
 | Grok DeeperSearch | 16.1% | 16.0% | 19.3% | 47.9% |
 | GPT-Researcher | 18.3% | 9.4% | 2.0% | 37.7% |
 
-<img width="336" height="185" alt="Image" src="https://github.com/user-attachments/assets/c0b7f534-c8a3-443c-8791-5bb99f649ae6" />
+<img width="420" height="232" alt="Image" src="https://github.com/user-attachments/assets/c0b7f534-c8a3-443c-8791-5bb99f649ae6" />
 
-<img width="327" height="151" alt="Image" src="https://github.com/user-attachments/assets/9635bfe0-e378-468e-855e-d3270f04dbd1" />
+<img width="410" height="189" alt="Image" src="https://github.com/user-attachments/assets/9635bfe0-e378-468e-855e-d3270f04dbd1" />
 
 ### 요약
 
@@ -212,10 +212,10 @@ Google Cloud AI Research의 이번 연구는 **검색 도구만으로도 최고 
 
 ## 결론
 
-TTD-DR은 단순히 성능 수치를 개선한 것을 넘어 **AI 연구 에이전트 설계의 근본적 패러다임 전환**을 제시했다. 인간의 연구 과정을 diffusion 프로세스로 모델링하고, 초안 중심의 반복적 정제 (refining) 방식을 도입한 것은혁신적이었다.
+TTD-DR은 단순히 성능 수치를 개선한 것을 넘어 **AI 연구 에이전트 설계의 근본적 패러다임 전환**을 제시했다. 인간의 연구 과정을 diffusion 프로세스로 모델링하고, 초안 중심의 반복적 정제 (refining) 방식을 도입한 것은 혁신적이다.
 
-특히 인상적인 부분은 **복잡한 추가 도구 없이도 알고리즘적 개선만으로 기존 시스템들을 압도한 점**이다. 이는 AI 연구에서 "더 많은 데이터, 더 큰 모델, 더 복잡한 도구"가 항상 정답은 아닌 것 같다. [~~(그래도 스케일링 법칙 못 참지)~~](https://arxiv.org/abs/2001.08361)
+특히 **복잡한 추가 도구 없이도 알고리즘적 개선만으로 기존 시스템들을 압도한 점**은 인상적이다. 이는 AI 연구에서 "더 많은 데이터, 더 큰 모델, 더 복잡한 도구"가 항상 정답은 아닌 것 같다. [~~(그래도 스케일링 법칙 못 참지)~~](https://arxiv.org/abs/2001.08361)
 
 하지만 실제 상용화 관점에서는 여전히 해결해야 할 과제들이 있다. 높은 계산 비용과 제한적인 도구 활용은 현실적인 제약이다. 그럼에도 불구하고 TTD-DR이 제시한 방향성-인간의 인지 과정 모방과 체계적인 피드백 루프-은 향후 AI Research Agent 발전의 중요한 발판이 될 것이다.
 
-Google의 이번 연구는 AI가 단순한 질문답변 도구를 넘어 진정한 **연구 파트너**로 진화할 수 있는 가능성을 보여준 의미 있는 성과다.
+Google Cloud의 해당 연구는 AI가 단순한 질문답변 도구를 넘어 진정한 **연구 파트너**로 진화할 수 있는 가능성을 보여준 의미 있는 성과다.

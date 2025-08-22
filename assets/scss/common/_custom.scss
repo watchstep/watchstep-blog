@@ -150,3 +150,97 @@ code, pre, kbd, samp {
   70%{opacity:1; transform:translate(var(--dx,4px),-2px) scale(1.00) rotate(calc(var(--r,0deg)+2deg));}
   100%{opacity:0; transform:translate(var(--dxEnd,6px),-6px) scale(.98) rotate(calc(var(--r,0deg)+4deg));}
 }
+
+// main article,              /* Doks 단일 글 컨테이너 */
+// .content article,          /* 안전용: 본문 래퍼 아래의 article */
+// .post-content, .entry-content {  /* 일부 마크다운 컨테이너 호환 */
+//   font-size: .95rem;       /* ← 여기만 취향대로 .93~.97rem 조절 */
+//   line-height: 1.75;
+// }
+
+// /* 본문 안의 헤딩만 한 단계씩 축소 (선택) */
+// .content article h1 { font-size: clamp(1.8rem, 2.6vw, 2.1rem); }
+// .content article h2 { font-size: clamp(1.35rem, 2.0vw, 1.6rem); }
+// .content article h3 { font-size: clamp(1.15rem, 1.7vw, 1.25rem); }
+// .content article h4 { font-size: 1.05rem; }
+
+// /* 목록/캡션/각주 등은 본문 크기를 상속 */
+// .content article p,
+// .content article li,
+// .content article figcaption {
+//   font-size: inherit;
+//   line-height: inherit;
+// }
+
+// /* 코드블록은 가독성을 위해 기본 크기 유지(원하면 .95rem로 맞춰도 됨) */
+// .content article pre,
+// .content article code {
+//   font-size: .98em;
+// }
+
+/* 1) 본문 전체 기본 글자/줄간격만 살짝 축소 */
+.content article,
+.post-content,
+.entry-content {
+  font-size: .95rem;    /* 취향에 따라 .93~.97rem 조절 */
+  line-height: 1.75;
+}
+
+/* 2) 단락·리스트·캡션은 본문 값 상속 */
+.content article p,
+.content article li,
+.content article figcaption {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* 3) 헤딩(선택) — 한 단계만 줄임. 과하면 이 블록 삭제 */
+.content article h1 { font-size: clamp(1.8rem, 2.6vw, 2.1rem); }
+.content article h2 { font-size: clamp(1.35rem, 2.0vw, 1.6rem); }
+.content article h3 { font-size: clamp(1.15rem, 1.7vw, 1.25rem); }
+.content article h4 { font-size: 1.05rem; }
+
+/* 4) 인용문(blockquote) — 본문과 같은 크기로 */
+.content article blockquote,
+.content article .blockquote {
+  font-size: 1em !important;   /* 필요시 .96rem 등으로 고정 가능 */
+  line-height: inherit;
+}
+.content article blockquote p,
+.content article .blockquote p {
+  font-size: inherit !important;
+  line-height: inherit;
+}
+.content article blockquote .blockquote-footer,
+.content article .blockquote-footer {
+  font-size: .9em !important;
+}
+
+/* 5) 코드 — 인라인/블록만 살짝 축소 */
+.content article :not(pre) > code,
+.content article kbd,
+.content article samp {
+  font-size: .88em !important;   /* .86~.92em 범위에서 조절 */
+  line-height: 1.6;
+}
+.content article pre,
+.content article pre code,
+.content article .highlight pre,
+.content article figure.highlight pre,
+.content article .chroma,
+.content article .chroma code,
+.content article pre[class*="language-"] {
+  font-size: .90em !important;   /* 블록은 인라인보다 약간 크게 */
+  line-height: 1.55;
+}
+.content article .chroma .lntable td,
+.content article .chroma .lntd {
+  font-size: inherit !important; /* 줄번호 크기 맞춤 */
+}
+.content article pre { overflow: auto; }
+
+/* 6) 'lead' 문단을 키워놓는 테마 기본값 무력화(있을 때만) */
+.content article .lead {
+  font-size: 1em !important;
+  font-weight: 400;
+}
