@@ -29,7 +29,7 @@ seo:
 
 ## 논문 요약
 
-Google Cloud AI Research팀이 인간의 연구 과정을 모방한 혁신적인 AI 연구 에이전트 TT**D-DR(Test-Time Diffusion Deep Researcher)**를 발표했다. 기존 Deep Research 에이전트들이 복잡한 장문 연구 보고서 생성에서 보이는 성능 한계를 극복하기 위해, 인간의 계획-초안-수정 과정을 diffusion 프로세스로 모델링한 것이 핵심이다. 초기 **"노이즈가 있는"** 초안을 점진적으로 정제하는 denoising 과정과 각 구성요소를 개별적으로 최적화하는 self-evolution 알고리즘을 결합했다. 실험 결과 OpenAI Deep Research 대비 69.1%~74.5%의 승률을 기록하며 기존 연구 에이전트들을 크게 능가하는 성과를 보였다.
+Google Cloud AI Research팀이 인간의 연구 과정을 모방한 혁신적인 AI 연구 에이전트 TT**D-DR(Test-Time Diffusion Deep Researcher)**를 발표했다. 기존 Deep Research 에이전트들이 복잡한 장문 연구 보고서 생성에서 보이는 성능 한계를 극복하기 위해, 인간의 계획-초안-수정 과정을 diffusion 프로세스로 모델링한 것이 핵심이다. 초기 **"노이즈가 있는"** 초안을 점진적으로 정제하는 denoising 과정과 각 구성요소를 개별적으로 최적화하는 self-evolution 알고리즘을 결합했다. 실험 결과 OpenAI Deep Research 대비 69.1%~74.5%로 높은 성능을 보여 기존 연구 에이전트들을 크게 뛰어넘는 성과를 보였다.
 
 ## AI가 진짜 연구자처럼 생각할 수 있을까?
 

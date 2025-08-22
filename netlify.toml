@@ -33,17 +33,48 @@
 # Redirects and rewrites — https://docs.netlify.com/routing/redirects/#syntax-for-the-netlify-configuration-file
 
 # Custom headers — https://docs.netlify.com/routing/headers/#syntax-for-the-netlify-configuration-file
+# [[headers]]
+#   for = "/*"
+#   [headers.values]
+#     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+#     X-Content-Type-Options = "nosniff"
+#     X-XSS-Protection = "1; mode=block"
+#     Content-Security-Policy = "default-src 'self'; manifest-src 'self'; connect-src 'self'; font-src 'self'; img-src 'self' https://avatars.githubusercontent.com data:; script-src 'self' 'nonce-dXNlcj0iaGVsbG8iLGRvbWFpbj0iaGVua3ZlcmxpbmRlLmNvbSIsZG9jdW1lbnQud3JpdGUodXNlcisiQCIrZG9tYWluKTs=' 'sha256-aWZ3y/RxbBYKHXH0z8+8ljrHG1mSBvyzSfxSMjBSaXk='; style-src 'self'"
+#     X-Frame-Options = "SAMEORIGIN"
+#     Referrer-Policy = "strict-origin"
+#     Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
+#     Cache-Control= '''
+#     public,
+#     max-age=31536000'''
+#     Access-Control-Allow-Origin = "*"
+
 [[headers]]
   for = "/*"
   [headers.values]
+    # 보안 헤더
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "default-src 'self'; manifest-src 'self'; connect-src 'self'; font-src 'self'; img-src 'self' https://avatars.githubusercontent.com data:; script-src 'self' 'nonce-dXNlcj0iaGVsbG8iLGRvbWFpbj0iaGVua3ZlcmxpbmRlLmNvbSIsZG9jdW1lbnQud3JpdGUodXNlcisiQCIrZG9tYWluKTs=' 'sha256-aWZ3y/RxbBYKHXH0z8+8ljrHG1mSBvyzSfxSMjBSaXk='; style-src 'self'"
-    X-Frame-Options = "SAMEORIGIN"
-    Referrer-Policy = "strict-origin"
-    Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
-    Cache-Control= '''
+    X-Content-Type-Options   = "nosniff"
+    X-XSS-Protection         = "1; mode=block"
+    X-Frame-Options          = "SAMEORIGIN"
+    Referrer-Policy          = "strict-origin"
+    Permissions-Policy       = "geolocation=(self), microphone=(), camera=()"
+
+    # CSP 조정 (lazyload/inline 스크립트 + 외부 이미지 허용)
+    Content-Security-Policy  = """
+      default-src 'self';
+      img-src 'self' https: data: blob:;
+      script-src 'self' 'unsafe-inline';
+      style-src  'self' 'unsafe-inline';
+      font-src   'self' data:;
+      connect-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      frame-ancestors 'self';
+      upgrade-insecure-requests;
+    """
+
+    # 캐시 정책은 상황 따라 유지/조정
+    Cache-Control = '''
     public,
     max-age=31536000'''
     Access-Control-Allow-Origin = "*"
