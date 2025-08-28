@@ -1,6 +1,6 @@
 title = "Watchstep Blog"
 baseURL = "https://blog.watchstep.me/"
-canonifyURLs = false
+canonifyURLs = true
 relativeURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
