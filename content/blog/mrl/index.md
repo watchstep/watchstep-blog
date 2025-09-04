@@ -27,8 +27,9 @@ gemini-embedding-001 (Google, 2025), text-embedding-3-large (2024, OpenAI), voya
 *"multi embedding"이라고도 부르기도 한다. 논문에서는 multi-objective MRL로 표현한다
 *downstream task란 학습된 임베딩을 분류/검색/랭킹 등과 같은 후속 작업 (흔히 훈련된 모델을 다운스트림 테스크에 맞게 파인튜닝한다고 한다.)
 
+<img src="https://github.com/user-attachments/assets/e235885c-e7be-4231-9b24-2c19cea7595c" alt="MRL 구조도" style="width:380px;height:auto;" />
 
-<img src="https://github.com/user-attachments/assets/e235885c-e7be-4231-9b24-2c19cea7595c" alt="MRL 구조도" style="width:400px;height:auto;" />
+&nbsp;
 
 큰 임베딩 안에 그 자체로도 유용한 작은 임베딩들이 겹겹이 들어가 있어 상황에 맞게 꺼내 사용할 수 있다는 것이다. “책 읽기”로 비유하자면 32차원으로 책 표지와 목차를 살펴보고, 내용을 더 읽고 싶으면 128차원까지 책을 펼쳐보고, 그럼에도 부족하면 부록, 즉 최종 차원까지 보는 것이다.
 
@@ -51,7 +52,7 @@ MRL은 계산 자원과 상황에 맞춰 바로 하나의 모델 & 하나의 임
 
 ## 2/ 왜 필요한가?
 
-임베딩 차원 \(d\), 데이터 크기 \(N\), 라벨 수 \(L\)에 비례하여 선형적으로 추론 비용이 증가한다.
+임베딩 차원 \\(d\\), 데이터 크기 \\(N\\), 라벨 수 \\(L\\)에 비례하여 선형적으로 추론 비용이 증가한다.
 
 경사 기반 학습은 의미 있는 정보가 벡터 전역으로 퍼지는 경향이 있어 낮은 차원만으로 충분한 작업임에도 큰 차원을 강제하는 비효율이 발생한다.
 
@@ -61,7 +62,7 @@ MRL은 추가 추론 비용 없이 기존 파이프라인을 조금 수정해 �
 
 ## 3/ 아이디어 - “앞은 요약, 뒤는 디테일”(**coarse→fine)**
 
-<img src="https://github.com/user-attachments/assets/5b3e3205-485d-42e1-acd8-d7f2802e9f30" alt="MRL 구조도" style="width:500px;height:auto;" />
+<img src="https://github.com/user-attachments/assets/5b3e3205-485d-42e1-acd8-d7f2802e9f30" alt="MRL 구조도" style="width:420px;height:auto;" />
 
 MRL은 고차원 임베딩 벡터 안에 coarse-to-fine granularity 수준의 정보를 계층적으로 인코딩한다.
 
@@ -71,12 +72,12 @@ $$
 \min_{\theta_F, \{W^{(m)}\}} \frac{1}{N} \sum_{m \in \mathcal{M}} \sum_{i} c_m \mathcal{L}(W^{(m)} F(x_i; \theta_F)_{1:m}, y_i)
 $$
 
-- \(F(x_i;\theta_F)\): 입력 x로부터 d차원 임베딩 벡터 z를 생성하는 생성망
-- \(F(\cdot)_{1:m}\):  생성된 d차원 중 처음 **m차원(prefix)**만 사용
-- \(W^{(m)}\):  m차원 임베딩을 위한 선형 분류기 가중치
-- \(c_m\):  각 차원별 손실에 대한 중요도 가중치(relative importance)
-- \(M\):  최적화할 임베딩 차원의 집합 e.g. {8, 16, 32, … , 256, 512}
-- \(L\):  다중 클래스 소프트맥스 크로스 엔트로피(multi-class softmax crossentropy) 손실 함수
+- \\(F(x_i;\theta_F)\\): 입력 x로부터 d차원 임베딩 벡터 z를 생성하는 생성망
+- \\(F(\cdot)_{1:m}\\):  생성된 d차원 중 처음 **m차원(prefix)**만 사용
+- \\(W^{(m)}\\):  m차원 임베딩을 위한 선형 분류기 가중치
+- \\(c_m\\):  각 차원별 손실에 대한 중요도 가중치(relative importance)
+- \\(M\\):  최적화할 임베딩 차원의 집합 e.g. {8, 16, 32, … , 256, 512}
+- \\(L\\):  다중 클래스 소프트맥스 크로스 엔트로피(multi-class softmax crossentropy) 손실 함수
 
 단순히 최종 차원에 대한 손실 함수(loss function)만 최적화하는 것이 아니라 미리 정해둔 여러 중첩된(nested) 차원들 각각에 대해 동시에 손실 함수를 최적화하도록 모델 훈련한다. 모든 중간 차원을 각각의 모델에 대해 독립적으로 학습하지 않고도 동일한 성능을 유지할 수 있다. 이처럼 하나의 모델로 한 번의 forward pass만으로 모든 계층적 표현을 얻어 추론 시 상당한 계산 비용을 절감할 수 있다.
 
