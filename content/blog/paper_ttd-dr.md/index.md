@@ -6,7 +6,7 @@ date: 2025-08-22T10:49:00+09:00
 lastmod: 2025-08-22T10:49:00+09:00
 draft: false
 weight: 50
-categories: []
+categories: ['agent']
 tags: ["paper", "LLM", "ai research agent", "test-time scaling"]
 contributors: []
 pinned: false
