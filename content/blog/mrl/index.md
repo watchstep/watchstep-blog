@@ -28,7 +28,7 @@ gemini-embedding-001 (Google, 2025), text-embedding-3-large (2024, OpenAI), voya
 *downstream task란 학습된 임베딩을 분류/검색/랭킹 등과 같은 후속 작업 (흔히 훈련된 모델을 다운스트림 테스크에 맞게 파인튜닝한다고 한다.)
 
 
-![MRL 구조도](https://github.com/user-attachments/assets/e235885c-e7be-4231-9b24-2c19cea7595c){ width=420px }
+<img src="https://github.com/user-attachments/assets/e235885c-e7be-4231-9b24-2c19cea7595c" alt="MRL 구조도" style="width:400px;height:auto;" />
 
 큰 임베딩 안에 그 자체로도 유용한 작은 임베딩들이 겹겹이 들어가 있어 상황에 맞게 꺼내 사용할 수 있다는 것이다. “책 읽기”로 비유하자면 32차원으로 책 표지와 목차를 살펴보고, 내용을 더 읽고 싶으면 128차원까지 책을 펼쳐보고, 그럼에도 부족하면 부록, 즉 최종 차원까지 보는 것이다.
 
@@ -61,7 +61,7 @@ MRL은 추가 추론 비용 없이 기존 파이프라인을 조금 수정해 �
 
 ## 3/ 아이디어 - “앞은 요약, 뒤는 디테일”(**coarse→fine)**
 
-![MRL 구조도](https://github.com/user-attachments/assets/5b3e3205-485d-42e1-acd8-d7f2802e9f30){ width=420px }
+<img src="https://github.com/user-attachments/assets/5b3e3205-485d-42e1-acd8-d7f2802e9f30" alt="MRL 구조도" style="width:500px;height:auto;" />
 
 MRL은 고차원 임베딩 벡터 안에 coarse-to-fine granularity 수준의 정보를 계층적으로 인코딩한다.
 
