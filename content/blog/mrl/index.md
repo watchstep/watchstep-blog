@@ -1,9 +1,9 @@
 ---
-title: "🪆Matryoshka Representation Learning (2022) 논문 리뷰"
+title: "🪆Matryoshka Representation Learning (2022) 논문 리뷰 (feat. EmbeddingGemma)"
 description: "MRL: 고정 차원 임베딩을 넘어 유연한 차원 임베딩 (adaptive multi-embedding)"
 summary: ""
 date: 2025-09-04T15:10:34+09:00
-lastmod: 2025-09-04T15:10:34+09:00
+lastmod: 2025-09-09T17:00:00+09:00
 draft: false
 weight: 50
 categories: ['embedding']
@@ -104,8 +104,100 @@ class Matryoshka_CE_Loss(nn.Module):
 
 PCA/SVD과 같은 사후 압축은 차원을 조금 줄이면 정확도가 올라가지만, 과하게 줄이면 정확도가 많이 감소한다. 반면, MRL은 학습 이후 단계가 아니라 end-to-end 학습 단계에서 미리 여러 차원에서 사용할 수 있도록 최적화되어 있어 정확도가 유지된다.
 
+## 5/ EmbeddingGemma로 보는 MRL 예시
+
+<img src="https://github.com/user-attachments/assets/a4edacb6-e98c-417c-8185-c54661e57a01" alt="EmbeddingGemma MRL 예시" style="width:750px;height:auto;" />
+
+
+25년 9월에 소개된 EmbeddingGemma 모델도 MRL을 지원하는데, 공식 문서에서 MRL 설명이 간략히 잘 되어 있다.
+
+```python {title="Python"}
+# MRL test for `google/embeddinggemma-300M`
+import os, numpy as np, torch
+from sentence_transformers import SentenceTransformer
+
+MODEL_ID = "google/embeddinggemma-300M"
+DEVICE   = "cuda" if torch.cuda.is_available() else "cpu"
+TOKEN    = os.getenv("HF_TOKEN")  # 필요 시 설정
+
+# Load Model
+model = SentenceTransformer(MODEL_ID, device=DEVICE, token=TOKEN)
+
+data = ["아이폰", "갤럭시", "삼성", "고양이"]
+
+def l2norm(E):  # 행별 L2 정규화
+    return E / (np.linalg.norm(E, axis=1, keepdims=True) + 1e-12)
+
+def cosine_to_anchor(E):
+    a = E[0]
+    sims = []
+    for i in range(1, len(E)):
+        s = float(np.dot(a, E[i]) / (np.linalg.norm(a)*np.linalg.norm(E[i]) + 1e-12))
+        sims.append((data[i], s))
+    return sims
+
+def show(title, E):
+    sims = cosine_to_anchor(E)
+    print(f"\n[{title}] shape={E.shape}")
+    for name, s in sims:
+        print(f"  {data[0]} vs {name}: {s:.4f}")
+    order = [name for name, s in sorted(sims, key=lambda x: x[1], reverse=True)]
+    print("  rank:", " > ")
+    return np.array([s for _, s in sims])
+
+def spearman(u, v):  # 순위 안정성 간단 지표
+    r = lambda x: np.argsort(np.argsort(-x))
+    return float(np.corrcoef(r(u), r(v))[0, 1])
+
+# ===== 1/ full embedding =====
+emb_full = model.encode(data, convert_to_numpy=True)
+D = emb_full.shape[1]
+s_full = show("FULL", emb_full)
+
+# ===== 2/ truncate to 512 dims +  L2 normalization =====
+E512 = l2norm(emb_full[:, :min(512, D)])
+s_512 = show("TRUNCATE 512 + L2", E512)
+
+# ===== 3/ truncate to 256 dims + L2 normalization =====
+E256 = l2norm(emb_full[:, :min(256, D)])
+s_256 = show("TRUNCATE 256 + L2", E256)
+
+# check MRL
+print(f"\nSpearman(FULL vs 512) = {spearman(s_full, s_512):.3f}")
+print(f"Spearman(FULL vs 256) = {spearman(s_full, s_256):.3f}")
+print(f"Base dim = {D}")
+```
+
+```text {title="Output"}
+[FULL] shape=(4, 768)
+  아이폰 vs 갤럭시: 0.9355
+  아이폰 vs 삼성: 0.9326
+  아이폰 vs 고양이: 0.8970
+  rank: 아이폰 > 갤럭시 > 삼성 > 고양이
+
+[TRUNCATE 512 + L2] shape=(4, 512)
+  아이폰 vs 갤럭시: 0.9442
+  아이폰 vs 삼성: 0.9419
+  아이폰 vs 고양이: 0.9133
+  rank: 아이폰 > 갤럭시 > 삼성 > 고양이
+
+[TRUNCATE 256 + L2] shape=(4, 256)
+  아이폰 vs 갤럭시: 0.9568
+  아이폰 vs 삼성: 0.9548
+  아이폰 vs 고양이: 0.9270
+  rank: 아이폰 > 갤럭시 > 삼성 > 고양이
+
+Spearman(FULL vs 512) = 1.000
+Spearman(FULL vs 256) = 1.000
+Base dim = 768
+```
+
+실제로 EmbeddingGemma 모델에서 MRL이 잘 동작하는지 확인한 결과 차원을 기존 768차원에서 256차원으로 축소하였는데도 의미를 잘 나타내고 있다는 것을 확인할 수 있다.
+
 ## References
 
 - [Matryoshka Representation Learning (2022, NeurIPS)](https://arxiv.org/abs/2205.13147)
 - [GitHub 구현 코드 - RAIVNLab/MRL](https://github.com/RAIVNLab/MRL)
 - [Medium - Matryoshka Embeddings: Russian Dolls for AI](https://medium.com/@pooja93palod/matryoshka-embeddings-russian-dolls-for-ai-58aa80ae7732)
+- [Introducing EmbeddingGemma: The Best-in-Class Open Model for On-Device Embeddings](https://developers.googleblog.com/en/introducing-embeddinggemma/)
+- [Generate Embeddings with Sentence Transformers](https://ai.google.dev/gemma/docs/embeddinggemma/inference-embeddinggemma-with-sentence-transformers)
