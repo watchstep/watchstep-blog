@@ -20,7 +20,7 @@ seo:
 
 # 0/ Algorithmic Aversion
 
-**Algorithmic Aversion(알고리즘 혐오)**은 알고리즘이 인간보다 더 정확하게 예측함에도 불구하고 알고리즘 기반 결정을 기피하는 심리적 현상을 말한다.
+**Algorithmic Aversion** (**알고리즘 혐오**)은 알고리즘이 인간보다 더 정확하게 예측함에도 불구하고 알고리즘 기반 결정을 기피하는 심리적 현상을 말한다.
 
 [Dietvorst et al. (2015)](https://marketing.wharton.upenn.edu/wp-content/uploads/2016/10/Dietvorst-Simmons-Massey-2014.pdf)은 실험을 통해 사람들이 **알고리즘의 단 한 번의 실수를 목격하는 것만으로, 알고리즘에 대한 신뢰를 급격히 상실하고, 인간의 판단을 더 선호**하는 경향을 입증했다.
 
