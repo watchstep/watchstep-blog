@@ -46,15 +46,9 @@ Prefill 이후 모델이 **한 토큰씩 순차적으로 출력(decode)**하는 
 
 이전에 사용했던 입력의 KV Cache를 재활용하는 것이다. 모델이 과거 입력했을 때 계산했던 Cache 값을 메모리에 저장했기에 동일한 프롬프트가 다시 입력되면 이미 계산한 KV Cache 값을 가져오는 것이다. 그래서 연산량이 가장 적고, 속도와 비용 모두 효율적이다.
 
-개인적으로 system prompt는 반복적으로 사용되므로, KV Cache에 저장해 재활용하는 경우가 많다. 그래서system prompt에는 역할 정의와 중요한 규칙 등 지침을 최대한 많이 포함하고, user prompt는 비교적 단순하게 작성하여 cache 효율을 높이는 게 좋다고 생각한다.
+개인적으로 system prompt는 반복적으로 사용되므로, KV Cache에 저장해 재활용하는 경우가 많다. 그래서 system prompt에는 역할 정의와 중요한 규칙 등 지침을 최대한 많이 포함하고, user prompt는 비교적 단순하게 작성하여 cache 효율을 높이는 게 좋다고 생각한다.
 
-# 1/ Model Collapse
-
-Model Collapse(모델 붕괴)는 LLM이 이전에 자신 혹은 다른 모델이 생성한 synthetic data(합성 데이터)를 반복적으로 학습하면서 발생하면서 출력의 다양성과 품질이 떨어지는 현상을 의미한다. synthetic data는 인간/현실 데이터만큼 다양하고 복잡한 분포를 반영하지 못한다.
-
-LLM이 합성 데이터에만 의존하게 되면 현실 세계의 데이터 분포에서 벗어나 **자신이 생성한 왜곡된 분포(self-generated distribution)**에 갇히게 된다는 것이다. 그럴듯한 왜곡된 표현을 만들면서 심각한 문제를 야기한다.
-
-# 2/ Introspection
+# 1/ Introspection
 
 모델이 자신의 internal state(내부 상태)를 관찰하고 생각하는 introspection(자기성찰) 능력을 실제로 지녔는지 확인하는 것이 [Emergent introspective awareness in large language models (Anthropic, 2025)](https://transformer-circuits.pub/2025/introspection/index.html) 연구의 목표이다. 모델이 단순히 그럴듯한 출력을 만드는 게 아니라, 실제 internal state에 근거하여 출력을 만드는지 검증하고자 했다.
 
@@ -80,7 +74,7 @@ internal state의 인과적 영향이 모델의 이전 출력을 거쳐서는 �
 
 “배가 고프다” 처럼 internal state에서 “배고픔”이 바로 언어로 표현된 단순 출력이 아니라 “나는 지금 배가 고프구나” 처럼 internal state에서 “배고픔”을 인식하고, 그 state에 대해 생각하는 또 다른 단계를 거치는지를 확인하는 것이다.
 
-# 3/ Concept Injection
+# 2/ Concept Injection
 
 Concept Injection(개념 주입)은 뇌과학 분야에서 아이디어를 얻은 기법으로, LLM이 정말 introspection,내부 인식을 하고 있는지 판단하기 위해 특정 concept를 나타내는 activation vector를 모델의 특정 layer에 인위적으로 주입해 internal state를 조작하는 방식이다.
 
@@ -178,13 +172,13 @@ Claude Opus 4/4.1와 같은 일부 모델은 주입된 단어를 “생각하고
 
 ### WHAT
 
-“생각하세요” 지시나 “생각하면 보상을 준다”는 지시가 있을 때는 해당 concept에 대응되는 내부 표현이 유의미하게 증가했음. 그러나 “생각하지 마세요” 지시에도 내부 표현이 완전히 사라지지 않고 활성화되는 결과를 보임. 이는 인지 심리학에서 ***흰곰 효과(Ironic Process Theory)**을 떠올리게 함.
+“생각하세요” 지시나 “생각하면 보상을 준다”는 지시가 있을 때는 해당 concept에 대응되는 내부 표현이 유의미하게 증가했음. 그러나 “생각하지 마세요” 지시에도 내부 표현이 완전히 사라지지 않고 활성화되는 결과를 보임. 이는 인지 심리학에서 ***흰곰 효과**(Ironic Process Theory)을 떠올리게 함.
 
 ---
 
-***흰곰 효과(Ironic Process Theory)**:  “흰곰을 생각하지 마"라고 하면 오히려 더 생각하게 되는 역설적 인지 현상
+***흰곰 효과**(Ironic Process Theory):  “흰곰을 생각하지 마"라고 하면 오히려 더 생각하게 되는 역설적 인지 현상
 
-# 4/ 실험 결과
+# 3/ 실험 결과
 
 | Model | Injected Thoughts | Prefill Detection |
 | --- | --- | --- |
