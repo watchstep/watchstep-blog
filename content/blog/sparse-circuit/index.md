@@ -83,7 +83,8 @@ Pruning은 흔히 Model Optimization(모델 최적화, 경량화)에서 많이 �
 
 <img src="https://github.com/user-attachments/assets/8cbe6b6a-57ba-43cb-a3d1-4453d2bd1db6" alt="image" style="width:80%;height:auto;" />
 
-Sparse Constraint는 Training(학습) 단계에서부터, $L1$ penalty 등을 부여해 weight(가중치)가 0이 되도록 강제하는 것이다. Pruning과 달리, Sparsity Constraint는 사후에 가지치기하는 것이 아니라 태생적으로 Sparse한 구조를 갖도록 한다. 해당 연구에서는 GPT-2와 비슷한 architecture를 사용하되, 모델을 훈련시킬 때부터 대부분의 weight를 0으로 만들어 Sparisty Constraint를 가했다.
+Sparse Constraint는 Training(학습) 단계에서부터 weight(가중치)가 0이 되도록 강제하는 것이다. $L0$ Norm, 즉 weight의 개수 자체를 제한하여 강제로 0으로 만들었다. (가중치 업데이트 후 상위 K개를 제외한 나머지를 0으로 만드는 Hard Thresholding)
+Pruning과 달리, Sparsity Constraint는 사후에 가지치기하는 것이 아니라 태생적으로 Sparse한 구조를 갖도록 한다. 해당 연구에서는 GPT-2와 비슷한 architecture를 사용하되, 모델을 훈련시킬 때부터 대부분의 weight를 0으로 만들어 Sparisty Constraint를 가했다.
 
 <img src="https://github.com/user-attachments/assets/9744dbee-e7e5-4522-b896-1f2b90d94d2d" alt="image" style="width:80%;height:auto;" />
 
