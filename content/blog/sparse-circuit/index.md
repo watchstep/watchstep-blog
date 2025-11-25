@@ -42,7 +42,7 @@ Anthropic의 ‘Golden Gate’ 실험은 이러한 LLM Interpretability 연구�
 
 Top-K SAE는  activation 값이 큰 Top-K개의 뉴런만 남기고 나머지는 모두 강제로 0으로 만든 것이다. [Neuronpedia](https://www.neuronpedia.org/) 사이트에서 여러 SAE를 시각적으로 확인하고, 어떤 input token이 어떤 feature를 켜는지 확인할 수 있다.
 
-$The dog says "bow wow" , and the cat says$ 를 입력했을 때 그 다음에 $meow$ 가 어떻게 나오는지를 보여준다.
+`The dog says "bow wow" , and the cat says`를 입력했을 때 그 다음에 `meow` 가 어떻게 나오는지를 보여준다.
 
 <img src="https://github.com/user-attachments/assets/044aae56-2394-436a-8174-c3b34678a005" alt="image" style="width:100%;height:auto;" />
 
@@ -120,9 +120,9 @@ Sparse Transformer를 훈련한 뒤, 해당 작업을 수행하는 데 필요한
 
 ## Trade-off: Sparsity vs. Model Scale
 
-Sparse Model이 Monosemanicity를 보장하여(각 뉴런이 하나의 의미만 갖도록) Interpretability(해석 가능성)을 높여준다. 그러나 기존 Dense Model이 중첩해서 정보를 꾹꾹 눌러 담던 효율성은 포기하는 것과도 같다고 느껴진다. 결국 방대한 지식을 주입하려면 Dense Model에 비해 Sparse Model원 훨씬 더 큰 모델을 요구할 것이다. 모델의 크기를 키워야 성능이 보장될텐데, Interpretability를 위해 모델 크기를 무작정 키우면 비용과 시간 모두 효율이 엄청나게 저하될 것이다. 어떻게 이 문제를 해결할 수 있을까? Interpretability와 연산 효율성 모두 어떻게 보장할 수 있을까?
+Sparse Model이 Monosemanticity를 유도하여(각 뉴런이 하나의 의미만 갖도록) Interpretability(해석 가능성)을 높여준다. 그러나 기존 Dense Model이 중첩해서 정보를 꾹꾹 눌러 담던 효율성은 포기하는 것과도 같다고 느껴진다. 결국 방대한 지식을 주입하려면 Dense Model에 비해 Sparse Model이 훨씬 더 큰 모델을 요구할 것이다. 모델의 크기를 키워야 성능이 보장될텐데, Interpretability를 위해 모델 크기를 무작정 키우면 비용과 시간 모두 효율이 엄청나게 저하될 것이다. 어떻게 이 문제를 해결할 수 있을까? Interpretability와 연산 효율성 모두 어떻게 보장할 수 있을까?
 
-현재로선 제일 적절한 해결책은 **MoE**(Mixture of Experts)일 것 같다. 모델의 크기, 즉 total parameter 수는 키워 지식의 총량은 늘리되, 입력에 대하여 필요한 연산만 수행하여 효율성을 챙기는 방식이다.
+현재로선 적절한 해결책은 **MoE**(Mixture of Experts)일 것 같다. 모델의 크기, 즉 total parameter 수는 키워 지식의 총량은 늘리되, 입력에 대하여 필요한 연산만 수행하여 효율성을 챙기는 방식이다.
 
 ## MoE(Mixture of Experts)
 
