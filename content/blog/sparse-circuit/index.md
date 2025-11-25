@@ -1,10 +1,10 @@
 ---
-title: "🕵️ Understanding neural networks through sparse circuits (OpenAI, 2025-11-13)"
+title: "🕵️ Weight-sparse transformers have interpretable circuits (OpenAI)"
 description: "Interpreting LLM with sparse circuits."
 summary: ""
 date: 2025-11-24T17:06:43+09:00
 lastmod: 2025-11-24T17:06:43+09:00
-draft: true
+draft: false
 weight: 50
 categories: []
 tags: ['OpenAI', 'Safety', 'Interpretability', 'Sparse Circuit']
@@ -18,6 +18,9 @@ seo:
   noindex: false # false (default) or true
 ---
 [**Understanding neural networks through sparse circuits**](https://openai.com/index/understanding-neural-networks-through-sparse-circuits/)
+
+[**Weight-sparse transformers have interpretable circuits**](https://arxiv.org/abs/2511.13653)
+
 
 블랙박스 AI 모델이 내부적으로 어떻게 작동하는지 이해하기 위해 OpenAI는 애초에 **희소한(Sparse) 구조**로 훈련하고, 그 안에서 **희소 회로(Sparse Circuit)**를 찾아내 모델을 설명하는 접근법을 공유했다.
 
@@ -110,3 +113,28 @@ Sparse Transformer를 훈련한 뒤, 해당 작업을 수행하는 데 필요한
 4. 알맞은 닫은 따옴표 출력
 
     마지막 토큰에서 이전 단계에서 가져온 여는 따옴표 정보를 통해 알맞은 닫은 따옴표 예측
+
+정리하자면, Sparse Model은 특정 작업을 담당하는 Circuits를 잘라내기 쉬워지고 Circuits 안 뉴런 수가 많지 않아 추적하기 쉬워진다는 것이다.
+
+# 4/ Takeaway
+
+## Trade-off: Sparsity vs. Model Scale
+
+Sparse Model이 Monosemanicity를 보장하여(각 뉴런이 하나의 의미만 갖도록) Interpretability(해석 가능성)을 높여준다. 그러나 기존 Dense Model이 중첩해서 정보를 꾹꾹 눌러 담던 효율성은 포기하는 것과도 같다고 느껴진다. 결국 방대한 지식을 주입하려면 Dense Model에 비해 Sparse Model원 훨씬 더 큰 모델을 요구할 것이다. 모델의 크기를 키워야 성능이 보장될텐데, Interpretability를 위해 모델 크기를 무작정 키우면 비용과 시간 모두 효율이 엄청나게 저하될 것이다. 어떻게 이 문제를 해결할 수 있을까? Interpretability와 연산 효율성 모두 어떻게 보장할 수 있을까?
+
+현재로선 제일 적절한 해결책은 **MoE(Mixture of Experts)**일 것 같다. 모델의 크기, 즉 total parameter 수는 키워 지식의 총량은 늘리되, 입력에 대하여 필요한 연산만 수행하여 효율성을 챙기는 방식이다.
+
+## MoE(Mixture of Experts)
+
+<img src="https://www.researchgate.net/publication/372684007/figure/fig2/AS:11431281177503641@1690514187283/Mixture-of-Experts-Diagram.ppm" alt="MoE" style="width:90%;height:auto;" />
+
+Sparse MoE Layers는 여러 개의 "Experts"를 포함한다. (주로 Experts는 FFNs(Feed Forward Networks)로 구성; Expert 수를 늘리면 total parameter 수도 증가)
+Gate Network; Router는 token별로 적절한 Expert를 선택해준다. 이때 굳이 Expert 한 명만 선택하지 않고, 여러 명을 선택할 수도 있다.
+
+### Weight-Sparse MoE
+
+각 Expert가 특정 작업을 담당하는 명확한 Sparse Circuit 단위로 정의하자는 것이다. 즉, Gating이 "어떤 Circuit을 활성화할지를 결정"하는 구조인 것이다.
+
+
+MoE 각각이 해석 가능한 구조가 되어 Interpretability가 더 쉬워질 것이다.
+실제로 해당 [논문](https://arxiv.org/abs/2511.13653)의 저자들도 **weight-sparse mixture-of-experts models**에 대하여 언급했다다. 아마 후속 연구는 Sparse Model을 MoE로 효율화하고, 각각의 Expert가 얼마나 깔끔히 작업별로 분리될지 확인하는 연구가 되리라 추측해본다.
