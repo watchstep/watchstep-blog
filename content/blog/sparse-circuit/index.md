@@ -1,7 +1,7 @@
 ---
 title: "🕵️ Weight-sparse transformers have interpretable circuits (OpenAI)"
-description: "Interpreting LLM with sparse circuits."
-summary: ""
+description: ""
+summary: "Interpreting LLM with sparse circuits"
 date: 2025-11-24T17:06:43+09:00
 lastmod: 2025-11-24T17:06:43+09:00
 draft: false
@@ -22,13 +22,13 @@ seo:
 [**Weight-sparse transformers have interpretable circuits**](https://arxiv.org/abs/2511.13653)
 
 
-블랙박스 AI 모델이 내부적으로 어떻게 작동하는지 이해하기 위해 OpenAI는 애초에 **희소한(Sparse) 구조**로 훈련하고, 그 안에서 **희소 회로(Sparse Circuit)**를 찾아내 모델을 설명하는 접근법을 공유했다.
+블랙박스 AI 모델이 내부적으로 어떻게 작동하는지 이해하기 위해 OpenAI는 애초에 **희소한(Sparse) 구조**로 훈련하고, 그 안에서 **희소 회로**(Sparse Circuit)를 찾아내 모델을 설명하는 접근법을 공유했다.
 
 ## Mechanistic Interpretability and SAE
 
 Mechanistic Interpretability (기계론 적 해석 가능성)는 모델 내부의 연산을 구조적으로 이해하겠다는 분야다. 최근 Mechanistic Interpretability 분야에서에서 SAE(Sparse Autoencoder)가 큰 주목을 받고 있다.
 
-최근 발표된  [**A Survey on Sparse Autoencoders: Interpreting the Internal Mechanisms of Large Language Models](https://arxiv.org/abs/2503.05613)**  서베이 논문에서는 SAE가 중첩(Superposition)된 feature를 더 해석 가능한 요소로 분리하는 유용한 도구로 설명한다.
+최근 발표된  [**A Survey on Sparse Autoencoders: Interpreting the Internal Mechanisms of Large Language Models**](https://arxiv.org/abs/2503.05613)서베이 논문에서는 SAE가 중첩(Superposition)된 feature를 더 해석 가능한 요소로 분리하는 유용한 도구로 설명한다.
 
 [SAE Bench](https://github.com/adamkarvonen/SAEBench)  벤치마크는 이런 SAE를 평가하기 위한 벤치마크이다.
 
@@ -95,18 +95,18 @@ Sparsity Constraint를 가하여 처음부터 Sparse하게 학습된 모델이 �
 
 Dense model을 사후에 pruning한 경우에는 중요한 Circuit을 찾고자 했을 때, 뉴런들이 복잡하게 얽혀 있어 깔끔하게 Circuit을 추출하기 어려웠다. 반면, Sparse Model은 ‘해당 뉴런이 여기서 신호를 입력 받아 다른 뉴런에게 보내는구나’처럼 작동 원리를 쉽게 이해할 수 있다. 또한 Sparse Model이 사후 Pruning Model보다 Interpretability와 성능 모두 더 좋다고 제시했다.
 
-# 3/ Python 코딩 실험 :  $“$ , $‘$ 짝 맞추기
+# 3/ Python 코딩 실험 :  `“` , `‘` 짝 맞추기
 
-Sparse Model, 즉 애초에 Sparse한 구조를 지닌 모델이 내부 구조를 판단하기 훨씬 좋다는 것을 검증하기 위해 Python 언어로 학습된 모델이  $‘hello$는 작은 따옴표 ‘, $“hello$는 큰 따옴표 “로 닫아 짝을 완성하는 작업을 진행했다.
+Sparse Model, 즉 애초에 Sparse한 구조를 지닌 모델이 내부 구조를 판단하기 훨씬 좋다는 것을 검증하기 위해 Python 언어로 학습된 모델이 `‘hello`는 작은 따옴표 `‘`, `“hello`는 큰 따옴표 `“`로 닫아 짝을 완성하는 작업을 진행했다.
 
 <img src="https://github.com/user-attachments/assets/3ab0c062-8ce7-441c-8b7e-aa27ea98c945" alt="image" style="width:90%;height:auto;" />
 
 Sparse Transformer를 훈련한 뒤, 해당 작업을 수행하는 데 필요한 최소 Circuit를 찾은 결과 해당 Circuit은 엄청나게 단순했다. (Residual Channel 5개, 0번 MLP Layer 2개, 10번 Attention의 Query-Key Channel 1개, Value Channel 1개로 구성되어 있었다.)
 
 1. Residual Channel에서 따옴표 인코딩
-한 Residual Channel에서는 $‘$ 인코딩, 다른 Channel에서는 $“$ 인코딩
+한 Residual Channel에서는 `‘` 인코딩, 다른 Channel에서는 `“` 인코딩
 2. MLP(Multi-Layer Perceptron)  Layer에서 따옴표 인지 & 따옴표의 종류 구분
-    - $‘$, $“$ 따옴표를 인지를 감지
+    - `‘`, `“` 따옴표를 인지를 감지
     - 작은 따옴표인지 큰 따옴표인지 분류
 3. Attention으로 이전 따옴표 조회
 10번 레이어의 Attention이 중간 토큰을 무시하고, 현재 위치에서 가장 가까운 여는 따옴표 토큰을 찾아 가져오기
@@ -122,7 +122,7 @@ Sparse Transformer를 훈련한 뒤, 해당 작업을 수행하는 데 필요한
 
 Sparse Model이 Monosemanicity를 보장하여(각 뉴런이 하나의 의미만 갖도록) Interpretability(해석 가능성)을 높여준다. 그러나 기존 Dense Model이 중첩해서 정보를 꾹꾹 눌러 담던 효율성은 포기하는 것과도 같다고 느껴진다. 결국 방대한 지식을 주입하려면 Dense Model에 비해 Sparse Model원 훨씬 더 큰 모델을 요구할 것이다. 모델의 크기를 키워야 성능이 보장될텐데, Interpretability를 위해 모델 크기를 무작정 키우면 비용과 시간 모두 효율이 엄청나게 저하될 것이다. 어떻게 이 문제를 해결할 수 있을까? Interpretability와 연산 효율성 모두 어떻게 보장할 수 있을까?
 
-현재로선 제일 적절한 해결책은 **MoE(Mixture of Experts)**일 것 같다. 모델의 크기, 즉 total parameter 수는 키워 지식의 총량은 늘리되, 입력에 대하여 필요한 연산만 수행하여 효율성을 챙기는 방식이다.
+현재로선 제일 적절한 해결책은 **MoE**(Mixture of Experts)일 것 같다. 모델의 크기, 즉 total parameter 수는 키워 지식의 총량은 늘리되, 입력에 대하여 필요한 연산만 수행하여 효율성을 챙기는 방식이다.
 
 ## MoE(Mixture of Experts)
 
@@ -134,7 +134,6 @@ Gate Network; Router는 token별로 적절한 Expert를 선택해준다. 이때 
 ### Weight-Sparse MoE
 
 각 Expert가 특정 작업을 담당하는 명확한 Sparse Circuit 단위로 정의하자는 것이다. 즉, Gating이 "어떤 Circuit을 활성화할지를 결정"하는 구조인 것이다.
-
 
 MoE 각각이 해석 가능한 구조가 되어 Interpretability가 더 쉬워질 것이다.
 실제로 해당 [논문](https://arxiv.org/abs/2511.13653)의 저자들도 **weight-sparse mixture-of-experts models**에 대하여 언급했다다. 아마 후속 연구는 Sparse Model을 MoE로 효율화하고, 각각의 Expert가 얼마나 깔끔히 작업별로 분리될지 확인하는 연구가 되리라 추측해본다.
