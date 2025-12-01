@@ -21,8 +21,8 @@
 {{ $start = mul (div $start $oneDay) $oneDay }}
 
 {{/* 블로그 글 */}}
-{{ $blog := site.GetPage "section" "blog" }}
-{{ $allPosts := cond $blog $blog.RegularPagesRecursive (slice) }}
+{{ $posts := site.GetPage "section" "posts" }}
+{{ $allPosts := cond $posts $posts.RegularPagesRecursive (slice) }}
 {{ $allPosts = where $allPosts "Draft" "!=" true }}
 
 {{/* 날짜별 카운트(히트맵): 에포크 '일' 키로 집계 */}}
