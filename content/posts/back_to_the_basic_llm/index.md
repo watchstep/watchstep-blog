@@ -120,7 +120,7 @@ LLM (더 정확하게 말하자면 Decoder-only LLM)은 정방향 계산을 수�
 
 ## 3.2 신경망(Neural Network)
 
-<img src="image_6.png" alt="[https://intuitivetutorial.com/2023/07/23/activation-functions-in-deep-learning/](https://intuitivetutorial.com/2023/07/23/activation-functions-in-deep-learning/)" style="width:500px;height:auto;" />
+<img src="image_6.png" alt="[https://intuitivetutorial.com/2023/07/23/activation-functions-in-deep-learning/](https://intuitivetutorial.com/2023/07/23/activation-functions-in-deep-learning/)" style="width:400px;height:auto;" />
 
 [https://intuitivetutorial.com/2023/07/23/activation-functions-in-deep-learning/](https://intuitivetutorial.com/2023/07/23/activation-functions-in-deep-learning/)
 
@@ -144,7 +144,7 @@ Universal Approximation Theorem은 신경망이 왜 중요한지 설명해주는
 
 ## 3.3 Transformer - _Attention Is All You Need_
 
-<img src="image_7.png" alt="[https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762)" style="width:500px;height:auto;" />
+<img src="image_7.png" alt="[https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762)" style="width:300px;height:auto;" />
 
 [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762)
 
@@ -152,7 +152,7 @@ Universal Approximation Theorem은 신경망이 왜 중요한지 설명해주는
 
 ### Tokenization(토큰화)
 
-<img src="image_8.png" alt="[https://tiktokenizer.vercel.app/](https://tiktokenizer.vercel.app/)" style="width:500px;height:auto;" />
+<img src="image_8.png" alt="[https://tiktokenizer.vercel.app/](https://tiktokenizer.vercel.app/)" style="width:400px;height:auto;" />
 
 [https://tiktokenizer.vercel.app/](https://tiktokenizer.vercel.app/)
 
@@ -196,7 +196,7 @@ Encoder 기반 모델은 주로 representation model(표현 모델)이라고 일
 
 ## 4.2 Decoder-Only
 
-<img src="image_13.png" alt="[https://yjjo.tistory.com/35](https://yjjo.tistory.com/35)" style="width:500px;height:auto;" />
+<img src="image_13.png" alt="[https://yjjo.tistory.com/35](https://yjjo.tistory.com/35)" style="width:400px;height:auto;" />
 
 [https://yjjo.tistory.com/35](https://yjjo.tistory.com/35)
 
