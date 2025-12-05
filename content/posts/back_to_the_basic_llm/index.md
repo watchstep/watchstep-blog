@@ -4,7 +4,7 @@ description: "Understanding the fundamental concept of LLMs"
 summary: ""
 date: 2025-12-05T09:41:14+09:00
 lastmod: 2025-12-05T09:41:14+09:00
-draft: true
+draft: false
 weight: 50
 categories: ["Basic", "LLM"]
 tags: ["LLM", "NTP", "Transformer"]
