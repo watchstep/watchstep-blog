@@ -37,13 +37,11 @@ next token prediction과 continuous concepts를 결합한 프레임워크.
 
 SAE (Sparse Autoencoder)를 사용해 의미 있는 concept를 추출하고, 이를 모델의 hidden state에 결합. concept은 next token prediction에 직접적으로 기여하게 됨. (각 context에 대해 의미 있는 concept를 효과적으로 추출해 표현)
 
-- **기존 방식** - Next Token Prediction
+**기존 방식** - Next Token Prediction
+<img src="image_2.png" alt="image_1.png" style="width:600px;height:auto;" />
 
-  <img src="image_2.png" alt="image_1.png" style="width:600px;height:auto;" />
-
-  **_CoCoMix_** - Next Token Prediction + Continuous Concept Prediction
-
-  <img src="image_3.png" alt="image_1.png" style="width:600px;height:auto;" />
+**_CoCoMix_** - Next Token Prediction + Continuous Concept Prediction
+<img src="image_3.png" alt="image_1.png" style="width:600px;height:auto;" />
 
 - **Target concept selection using attribution**
 
