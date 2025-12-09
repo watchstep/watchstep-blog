@@ -44,15 +44,12 @@ SAE (Sparse Autoencoder)를 사용해 의미 있는 concept를 추출하고, 이
 <img src="image_3.png" alt="image_1.png" style="width:600px;height:auto;" />
 
 - **Target concept selection using attribution**
-
   추출된 concept들은 개별적으로 input에 어느 정도 영향을 미치는지 평가하기 위해 attribution score (i.e. measuring the influence on the output)를 사용해 가장 중요한 concept 선택.
 
 - **Predicting the selected concepts**
-
   선택된 concept은 모델의 hidden state로부터 예측되며, 이때 Cross-Entropy Loss를 최소화하며 학습. (기존 next token prediction loss와 concept prediction loss를 조합해 최적화)
 
 - **Mixing continuous concepts with token embeddings**
-
   예측된 연속 concept들을 압축해 하나의 “연속 concept” (compact vector)을 형성하고, hidden state에 interleaving (끼워 넣기) → token과 연속 concept이 함께 모델의 예측에 기여하게 됨.
 
 - CoCoMix는 예측된 concept을 직접 분석하고 수정할 수 있는 기능을 제공해 유저가 모델의 reasoning 과정을 쉽게 이해할 수 있음 (직접적으로 생성 결과에 영향을 미칠 수 있는 기능)
@@ -71,7 +68,7 @@ $M( \cdot )$ - linear prediction head
 
 $z_t = M(h_t) = Wh_t + b \in \mathbb R^C$ - model outputs (logit)
 
-- context 정보를 갖고 있는 hidden state representation (고차원 벡터)를 선형 변환해 $C$차원의 concept space에 투영해 각 concept별 logit 값 계산.
+context 정보를 갖고 있는 hidden state representation (고차원 벡터)를 선형 변환해 $C$차원의 concept space에 투영해 각 concept별 logit 값 계산.
 
 $\mathcal I = \{i_1, ... , i_{K_{attr}}\}$ - 상위 $K_{attr}$ 개념들의 index 집합.
 
@@ -126,11 +123,13 @@ CoCoMix는 21.5% 더 적은 tokens를 사용함에도 기존 NTP 모델과 동�
 <img src="image_6.png" alt="{8577757F-FC3E-4402-B28D-A8D707617894}.png" style="width:600px;height:auto;" />
 
 KD (Knowledge Distillation) - Teacher model의 지식을 Student model에 전이하는 방법
-유사점 - pretrained model (SAE)에서 의미 있는 개념을 추출해 base model 학습에 활용했기 때문.
-차이점 - 기존 KD는 확률 기반 학습을 했다면, CoCoMix는 concept 기반 학습을 수행해 weak-to-strong supervision을 가능하게 함 (작은 모델에서 추출한 개념으로 더 큰 모델을 훈련할 수 있다는 것을 입증)
 
-기존 KD - “해당 토큰이 등장할 확률 몇 %인지” 같은 확률 자체를 그대로 학습
-CoCoMix - “해당 문장에서 중요한 개념이 무엇인지” 같은 concept를 학습한 후, hidden state에 결합
+_유사점_ - pretrained model (SAE)에서 의미 있는 개념을 추출해 base model 학습에 활용했기 때문.
+
+_차이점_ - 기존 KD는 확률 기반 학습을 했다면, CoCoMix는 concept 기반 학습을 수행해 weak-to-strong supervision을 가능하게 함 (작은 모델에서 추출한 개념으로 더 큰 모델을 훈련할 수 있다는 것을 입증)
+
+- 기존 KD - “해당 토큰이 등장할 확률 몇 %인지” 같은 확률 자체를 그대로 학습
+- CoCoMix - “해당 문장에서 중요한 개념이 무엇인지” 같은 concept를 학습한 후, hidden state에 결합
 
 ## 7/ Interpretability (해석 가능성) & Steerability (제어 가능성)
 
