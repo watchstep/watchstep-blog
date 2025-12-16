@@ -1,8 +1,8 @@
 ---
-title: "🥥 CoCoMix; LLM Pretraining with Continuous Concepts (Meta, 2025)"
+title: "🏝️ CoCoMix; LLM Pretraining with Continuous Concepts (Meta, 2025)"
 description: ""
 summary: ""
-date: 2025-05-09T00:00:00+09:00
+date: 2025-03-07T00:00:00+09:00
 lastmod: 2025-12-08T13:49:46+09:00
 draft: false
 weight: 50
