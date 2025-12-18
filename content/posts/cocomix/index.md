@@ -6,8 +6,8 @@ date: 2025-03-07T00:00:00+09:00
 lastmod: 2025-12-08T13:49:46+09:00
 draft: false
 weight: 50
-categories: ["Continuous Concept", "SAE"]
-tags: ["CoCoMix", "META", "LLM"]
+categories: ["paper review"]
+tags: ["CoCoMix", "META", "LLM", "Continuous Concept", "SAE" ]
 contributors: []
 pinned: false
 homepage: false

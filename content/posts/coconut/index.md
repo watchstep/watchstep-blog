@@ -6,7 +6,7 @@ date: 2025-01-24T00:00:00+09:00
 lastmod: 2025-12-09T10:21:13+09:00
 draft: false
 weight: 50
-categories: ["LLM", "CoT"]
+categories: ["LLM", "CoT", "paper review"]
 tags: ["CoCoNut", "Meta", "LLM"]
 contributors: []
 pinned: false

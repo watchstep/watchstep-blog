@@ -30,7 +30,7 @@ npm run build     # ⇒ hugo --minify --gc → public/
 
 ```bash
 # Create new post
-npm run create blog/my-post/index.md
+npm run create posts/my-post/index.md
 
 # Preview locally (`draft:true`)
 npm run dev
