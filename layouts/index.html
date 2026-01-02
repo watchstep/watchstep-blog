@@ -22,6 +22,7 @@
 
 {{/* 블로그 글 */}}
 {{ $posts := site.GetPage "section" "posts" }}
+{{ $postsURL := cond $posts $posts.RelPermalink ("/posts/" | relURL) }}
 {{ $allPosts := cond $posts $posts.RegularPagesRecursive (slice) }}
 {{ $allPosts = where $allPosts "Draft" "!=" true }}
 
@@ -66,6 +67,8 @@
 {{ $svgW := add $left (mul $weeks $step) }}
 {{ $svgH := add $top (mul 7 $step) }}
 
+{{ $tagsBase := "/tags/" | relLangURL }}
+
 <section class="section container py-4">
   <div id="ws-sprinkle" aria-hidden="true"
        data-seedling="{{ "images/seedling.png" | absURL }}"></div>
@@ -77,7 +80,11 @@
     <div class="ws-stats ws-stats--top">
       <div class="ws-metric">
         <div class="ws-metric__label">Total posts</div>
-        <div class="ws-metric__value">{{ $totalPosts }} <span class="ws-unit">posts</span></div>
+        <a class="ws-metric__value ws-metric__value--link"
+          href="{{ $postsURL }}"
+          aria-label="Link to Posts page">
+          {{ $totalPosts }} <span class="ws-unit">posts</span>
+        </a>
         <div class="ws-metric__sub">since {{ if $since }}{{ $since }}{{ else }}—{{ end }}</div>
       </div>
       <div class="ws-metric">
@@ -91,7 +98,10 @@
           {{ if gt (len $topTags) 0 }}
             {{ range $i, $it := $topTags }}
               {{ if gt $i 0 }}<span class="ws-tag-sep">·</span>{{ end }}
-              <span class="ws-tag">#{{ $it.tag }}</span>
+              <a class="ws-tag ws-tag--link"
+                 href="{{ $tagsBase }}{{ $it.tag | urlize }}/">
+                #{{ $it.tag }}
+              </a>
             {{ end }}
           {{ else }}<span class="ws-tag">—</span>{{ end }}
         </div>
