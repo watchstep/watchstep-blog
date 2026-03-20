@@ -1,3 +1,4 @@
+
 {{/* Doks 기본 메타를 유지하되, 읽기시간은 조건부로 */}}
 {{ $last := sub (len .Params.contributors) 1 }}
 {{ $ext := (or .Params.externalurl .Params.externalUrl) | default "" }}

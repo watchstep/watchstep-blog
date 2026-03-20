@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <div class="container">
+    <article class="mx-auto" style="max-width: 860px;">
+      <header class="mb-5">
+        <h1 class="mb-3">{{ .Title }}</h1>
+
+        {{ with .Params.lead }}
+          <p class="lead">{{ . }}</p>
+        {{ end }}
+
+        {{ partial "main/post-meta.html" . }}
+      </header>
+
+      <div class="content">
+        {{ .Content }}
+      </div>
+    </article>
+  </div>
+{{ end }}
