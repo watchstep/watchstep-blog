@@ -265,6 +265,7 @@ article > h1:first-child {
 .post-content {
   font-size: 0.93rem;
   line-height: 1.73;
+  margin-bottom: 2.5rem;
 }
 
 .post-content p,
@@ -332,4 +333,15 @@ article > h1:first-child {
 /* 카드 사이 간격 조금 주기 */
 .card {
   margin-bottom: 1em;
+}
+
+.docs-navigation .card {
+  max-width: 92%;
+  min-height: 160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.docs-navigation .card-body {
+  padding: 1.25rem 1.5rem;
 }
