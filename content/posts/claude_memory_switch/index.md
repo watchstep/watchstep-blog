@@ -75,10 +75,10 @@ If no date is known, use [unknown] instead.
 
 ### ChatGPT에서 메모리 가져오고 Claude에 추가하기
 
-<img width="500" height="auto" alt="ChatGPT에서 메모리 내보내기 프롬프트 예시" src="image_2.png" />
-
+<img width="650" height="auto" alt="ChatGPT에서 메모리 내보내기 프롬프트 예시" src="image_2.png" />
+<br></br>
 <img width="500" height="auto" alt="Claude 메모리에 추가된 결과 화면" src="image_3.png" />
-
+<br></br>
 ChatGPT에 위의 프롬프트를 복사 붙여넣기한 뒤 얻은 출력을 Claude의 메모리에 추가한 결과, 확실히 메모리 업데이트가 되긴 되었지만, 구체적인 내용까지는 무리라고 생각한다.
 엄청 간단하면서 핵심만 업데이트하기에는 좋다고 생각한다.
 

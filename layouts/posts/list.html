@@ -11,13 +11,20 @@
              alt="{{ .Title }}" width="150" height="150">
       </div>
     {{ end -}}
+
     {{ with .Params.headline -}}
       <h1 class="text-center">{{ . }}</h1>
     {{ else -}}
       <h1 class="text-center">{{ .Title }}</h1>
     {{ end -}}
-    {{ with .Params.summary -}}<p class="lead text-center">{{ . }}</p>{{ end -}}
-    {{ with .Content -}}<div class="text-center">{{ . }}</div>{{ end -}}
+
+    {{ with .Params.summary -}}
+      <p class="lead text-center">{{ . }}</p>
+    {{ end -}}
+
+    {{ with .Content -}}
+      <div class="text-center">{{ . }}</div>
+    {{ end -}}
   </div>
 </div>
 
@@ -36,15 +43,16 @@
         {{ end -}}
 
         <div class="card-body">
-          <article>
+          <article class="post-list-item">
             <h2 class="h3">
               {{- $ext := or .Params.externalurl .Params.externalUrl -}}
               {{- if $ext -}}
                 <a class="stretched-link text-body"
-                   href="{{ $ext }}" target="_blank"
+                   href="{{ $ext }}"
+                   target="_blank"
                    rel="noopener noreferrer nofollow"
                    aria-label="{{ .Params.title }} (opens in a new tab)">
-                   {{ .Params.title }}
+                  {{ .Params.title }}
                 </a>
               {{- else -}}
                 <a class="stretched-link text-body" href="{{ .RelPermalink }}">{{ .Params.title }}</a>
@@ -52,10 +60,9 @@
             </h2>
 
             {{ with .Params.summary -}}
-              <p>{{ . | safeHTML }}</p>
+              <p class="post-list-summary">{{ . | safeHTML }}</p>
             {{ end -}}
 
-            {{/* meta(날짜/읽기시간 등) — 파셜로 위임 (읽기시간 노출여부는 파셜 내부에서 결정) */}}
             {{ partial "main/post-meta.html" . }}
           </article>
         </div>

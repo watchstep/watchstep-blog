@@ -1,19 +1,21 @@
 {{ define "main" }}
-  <div class="container">
-    <article class="post-page mx-auto">
-      <header class="post-header">
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <article class="post-content">
+      {{ with .Params.headline -}}
+        <h1>{{ . }}</h1>
+      {{ else -}}
         <h1>{{ .Title }}</h1>
+      {{ end -}}
 
-        {{ with or .Params.lead .Params.summary .Description }}
-          <p class="lead">{{ . }}</p>
-        {{ end }}
+      {{ with .Params.summary -}}
+        <p class="lead">{{ . }}</p>
+      {{ end -}}
 
-        {{ partial "main/post-meta.html" . }}
-      </header>
+      {{ partial "main/post-meta.html" . }}
 
-      <div class="post-content">
-        {{ .Content }}
-      </div>
+      {{ .Content }}
     </article>
   </div>
+</div>
 {{ end }}
