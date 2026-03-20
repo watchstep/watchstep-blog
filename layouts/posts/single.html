@@ -10,12 +10,18 @@
             <h1>{{ .Title }}</h1>
           {{ end -}}
 
-          <p class="post-meta-row">
-            {{ partial "main/post-meta.html" . }}
-          </p>
+          {{ partial "main/post-meta.html" . }}
+
+          {{ if ne .Params.toc false -}}
+            <div class="d-lg-none">
+              {{ partial "sidebar/docs-toc-mobile.html" . }}
+            </div>
+          {{ end -}}
 
           {{ .Content }}
         </article>
+
+        {{ partial "sidebar/docs-navigation.html" . }}
       </div>
 
       {{ if ne .Params.toc false -}}
@@ -28,8 +34,4 @@
     </div>
   </div>
 </div>
-
-{{ if ne .Params.toc false -}}
-  {{ partial "sidebar/docs-toc-mobile.html" . }}
-{{ end -}}
 {{ end }}
