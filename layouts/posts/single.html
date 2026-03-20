@@ -1,21 +1,37 @@
 {{ define "main" }}
 <div class="row justify-content-center">
-  <div class="col-lg-9">
-    <article class="post-content">
-      {{ with .Params.headline -}}
-        <h1>{{ . }}</h1>
-      {{ else -}}
-        <h1>{{ .Title }}</h1>
+  <div class="col-lg-13 col-xl-12">
+    <div class="row">
+      <div class="col-lg-10">
+        <article class="post-content">
+          {{ with .Params.headline -}}
+            <h1>{{ . }}</h1>
+          {{ else -}}
+            <h1>{{ .Title }}</h1>
+          {{ end -}}
+
+          {{ with .Params.summary -}}
+            <p class="lead">{{ . }}</p>
+          {{ end -}}
+
+          {{ partial "main/post-meta.html" . }}
+
+          {{ .Content }}
+        </article>
+      </div>
+
+      {{ if ne .Params.toc false -}}
+        <div class="col-lg-4 d-none d-lg-block">
+          <aside class="docs-toc">
+            {{ partial "sidebar/docs-toc-desktop.html" . }}
+          </aside>
+        </div>
       {{ end -}}
-
-      {{ with .Params.summary -}}
-        <p class="lead">{{ . }}</p>
-      {{ end -}}
-
-      {{ partial "main/post-meta.html" . }}
-
-      {{ .Content }}
-    </article>
+    </div>
   </div>
 </div>
+
+{{ if ne .Params.toc false -}}
+  {{ partial "sidebar/docs-toc-mobile.html" . }}
+{{ end -}}
 {{ end }}
