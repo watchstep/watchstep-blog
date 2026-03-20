@@ -263,8 +263,8 @@ article > h1:first-child {
 }
 
 .post-content {
-  font-size: 0.92rem;
-  line-height: 1.72;
+  font-size: 0.93rem;
+  line-height: 1.73;
 }
 
 .post-content p,
@@ -279,16 +279,33 @@ article > h1:first-child {
   font-weight: 400;
 }
 
-.post-content .post-meta,
-.post-content .article-meta,
-.post-content .entry-meta {
-  display: flex;
-  justify-content: center;
+.post-content .post-meta-line {
+  text-align: center;
+}
+
+.post-content .post-meta-line > small {
+  display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.post-content .post-meta-line .reading-time {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1.25rem;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+
+.post-content .post-meta-line .reading-time svg,
+.post-content .post-meta-line .reading-time i {
+  vertical-align: middle;
+}
+
+.post-content .post-meta-line .reading-time svg,
+.post-content .post-meta-line .reading-time i {
+  margin-right: 0.35rem;
 }
 
 /* posts 목록 카드 내부 여백/줄간격 조정 */

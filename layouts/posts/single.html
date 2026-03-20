@@ -10,11 +10,9 @@
             <h1>{{ .Title }}</h1>
           {{ end -}}
 
-          {{ with .Params.summary -}}
-            <p class="lead">{{ . }}</p>
-          {{ end -}}
-
-          {{ partial "main/post-meta.html" . }}
+          <p class="post-meta-row">
+            {{ partial "main/post-meta.html" . }}
+          </p>
 
           {{ .Content }}
         </article>

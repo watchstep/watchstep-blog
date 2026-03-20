@@ -4,7 +4,7 @@
 {{ $ext := (or .Params.externalurl .Params.externalUrl) | default "" }}
 {{ $hideRT := or (not (default true (.Param "showReadingTime"))) (ne $ext "") }}
 
-<p>
+<p class="post-meta-line">
   <small>
     {{- time.Format (default ":date_long" .Site.Params.dateFormat) .PublishDate -}}
 
