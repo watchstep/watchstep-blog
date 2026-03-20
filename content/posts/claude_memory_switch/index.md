@@ -6,8 +6,8 @@ date: 2026-03-20T16:10:19+09:00
 lastmod: 2026-03-20T16:10:19+09:00
 draft: false
 weight: 50
-categories: []
-tags: ['AI 트렌드', '메모리 이식', 'Claude']
+categories: ['AI 트렌드', '메모리 이식', 'Claude']
+tags: []
 contributors: []
 pinned: false
 homepage: false
@@ -17,12 +17,8 @@ seo:
   canonical: "" # custom canonical URL (optional)
   noindex: false # false (default) or true
 ---
-# 프롬프트로 ChatGPT에서 Claude로 메모리 가져오기
 
-Created: March 18, 2026 6:31 PM
-Upload: No
-
-https://claude.com/import-memory
+**[Switch to Claude without starting over](https://claude.com/import-memory)**
 
 ## 0/ 메모리
 
