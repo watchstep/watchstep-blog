@@ -4,7 +4,7 @@ description: ""
 summary: "AI 트렌드 - Claude로 메모리 가져오기 기능"
 date: 2026-03-20T16:10:19+09:00
 lastmod: 2026-03-20T16:10:19+09:00
-draft: true
+draft: false
 weight: 50
 categories: []
 tags: ['AI 트렌드', '메모리 이식', 'Claude']
