@@ -1,7 +1,7 @@
 ---
 title: "☁️ 프롬프트로 ChatGPT에서 Claude로 메모리 가져오기"
 description: ""
-summary: "AI 트렌드 - Claude로 메모리 가져오기 기능"
+summary: "Claude로 메모리 가져오기 기능"
 date: 2026-03-20T16:10:19+09:00
 lastmod: 2026-03-20T16:10:19+09:00
 draft: false
