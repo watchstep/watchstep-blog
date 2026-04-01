@@ -26,7 +26,19 @@ seo:
 
 prompt injection은 악의적인 prompt를 통해 보안 지침을 무시하고 해킹을 시도하는 것을 의미한다. 유저 데이터나 API key 등 중요한 데이터가 유출될 수 있다. 유사한 것으로, Jailbreaking이 있는데, 윤리 및 안전 가드레이일을 무시하고, 비윤리적인 정보나 혐오 표현 등을 유도하는 것이다.
 
-👀 https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Prompt%20Injection
+👀 [GitHub | PayloadsAllTheThings/Prompt Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Prompt%20Injection)
+
+서비스를 개발했다면, 출시 전 충분한 stress test를 통해 극단적이거나 공격적인 시나리오에서 안전하게 작동하하는지 테스트해 사전에 위험 요소를 없애야 한다.
+이때, 가드레일을 구축해 비윤리적이거나 편향적인 정보를 포함하지 않도록 한다.
+또한, 프롬프트를 지속적으로 모니터링하고, 프롬프트의 성능을 정량화해서 판단해서 성능이 저하되지 않도록 해야 한다.
+
+LLM Ops에 유용한 도구들로 Promptfoo, Ragas, Guardrails AI, MLFlow,  W&B 등이 있으니 참고하길 바란다.
+
+- [Promptfoo](https://www.promptfoo.dev/) : 프롬프트 테스트 및 평가
+- [Ragas](https://github.com/vibrantlabsai/ragas) : RAG 성능 평가
+- [Guardrails AI](https://github.com/guardrails-ai/guardrails) : 가드레일 설정 및 검증
+- [MLFlow](https://mlflow.org/docs/latest/genai/eval-monitor/) : 실험 관리 및 모니터링
+- [W&B](https://wandb.ai/site/ko/) : 실험 관리 및 모니터링
 
 ### Level 1
 
