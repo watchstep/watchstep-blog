@@ -1,5 +1,5 @@
 ---
-title: "🪆Matryoshka Representation Learning (Google, 2022) 논문 리뷰 (feat. EmbeddingGemma)"
+title: "🪆 Matryoshka Representation Learning (Google, 2022) 논문 리뷰 (feat. EmbeddingGemma)"
 description: "MRL: 고정 차원 임베딩을 넘어 유연한 차원 임베딩 (adaptive multi-embedding)"
 summary: ""
 date: 2025-09-04T15:10:34+09:00

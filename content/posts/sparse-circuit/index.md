@@ -1,5 +1,5 @@
 ---
-title: "🕵️ Weight-sparse transformers have interpretable circuits (OpenAI)"
+title: "🕵️ Weight-sparse transformers have interpretable circuits (OpenAI) 논문 리뷰"
 description: ""
 summary: "Interpreting LLM with sparse circuits"
 date: 2025-11-24T17:06:43+09:00

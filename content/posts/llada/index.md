@@ -1,5 +1,5 @@
 ---
-title: "🌳 LLaDA; Large Language Diffusion Models (2025-02)"
+title: "🌳 LLaDA; Large Language Diffusion Models (2025-02) 논문 리뷰"
 description: ""
 summary: ""
 date: 2025-03-21T00:00:00+09:00

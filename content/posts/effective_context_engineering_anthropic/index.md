@@ -1,5 +1,5 @@
 ---
-title: "🎱 Effective context engineering for AI agents (Anthropic, 2025-09-29)"
+title: "🎱 Effective context engineering for AI agents (Anthropic, 2025-09-29) 리뷰"
 description: ""
 summary: ""
 date: 2025-10-13T12:06:53+09:00

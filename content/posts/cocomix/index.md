@@ -1,5 +1,5 @@
 ---
-title: "🏝️ CoCoMix; LLM Pretraining with Continuous Concepts (Meta, 2025)"
+title: "🏝️ CoCoMix; LLM Pretraining with Continuous Concepts (Meta, 2025) 논문 리뷰"
 description: ""
 summary: ""
 date: 2025-03-07T00:00:00+09:00

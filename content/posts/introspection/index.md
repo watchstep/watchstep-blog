@@ -1,5 +1,5 @@
 ---
-title: "🦜Emergent Introspective Awareness in Large Language Models (Anthropic, 2025-10-29)"
+title: "🦜 Emergent Introspective Awareness in Large Language Models (Anthropic, 2025-10-29) 논문 리뷰"
 description: "exploring whether LLMs can detect their internal states through concept injection experiments"
 summary: "Studying on self-awareness in LLM"
 date: 2025-11-07T13:55:35+09:00

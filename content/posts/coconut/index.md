@@ -1,5 +1,5 @@
 ---
-title: "🥥 CoCoNut; Training Large Language Models to Reason in a Continuous Latent Space (Meta, 2024)"
+title: "🥥 CoCoNut; Training Large Language Models to Reason in a Continuous Latent Space (Meta, 2024) 논문 리뷰"
 description: "Chain of Continuous Thought"
 summary: ""
 date: 2025-01-24T00:00:00+09:00
