@@ -18,7 +18,7 @@ seo:
   noindex: false # false (default) or true
 ---
 
-본 글은 [**Meta-Harness: End-to-End Optimization of Model Harnesses](https://yoonholee.com/meta-harness/)** 논문 리뷰 글이다.
+본 글은 **[Meta-Harness: End-to-End Optimization of Model Harnesses](https://yoonholee.com/meta-harness/)** 논문 리뷰 글이다.
 
 ## 0/ Harness
 
