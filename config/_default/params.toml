@@ -9,6 +9,16 @@ mainSections = ["posts"]
 [social]
   twitter = "getdoks"
 
+[comments]
+  enable = true
+  provider = "utterances"
+
+  [comments.utterances]
+    repo = "watchstep/watchstep-blog"
+    issueTerm = "pathname"
+    label = "comment"
+    theme = "preferred-color-scheme"
+
 # Doks (@thulite/doks-core)
 [doks]
   # Color mode

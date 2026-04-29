@@ -1,0 +1,15 @@
+{{- $comments := site.Params.comments -}}
+{{- if and $comments $comments.enable (eq $comments.provider "utterances") $comments.utterances.repo -}}
+  {{- $utterances := $comments.utterances -}}
+  <section class="comments my-5" aria-label="Comments">
+    <script
+      src="https://utteranc.es/client.js"
+      repo="{{ $utterances.repo }}"
+      issue-term="{{ $utterances.issueTerm | default "pathname" }}"
+      label="{{ $utterances.label | default "comment" }}"
+      theme="{{ $utterances.theme | default "preferred-color-scheme" }}"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </section>
+{{- end -}}
