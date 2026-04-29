@@ -63,10 +63,11 @@
     Content-Security-Policy  = """
       default-src 'self';
       img-src 'self' https: data: blob:;
-      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://utteranc.es;
       style-src  'self' 'unsafe-inline';
       font-src   'self' data: https://cdn.jsdelivr.net;
-      connect-src 'self';
+      connect-src 'self' https://utteranc.es https://api.github.com;
+      frame-src https://utteranc.es;
       object-src 'none';
       base-uri 'self';
       frame-ancestors 'self';
