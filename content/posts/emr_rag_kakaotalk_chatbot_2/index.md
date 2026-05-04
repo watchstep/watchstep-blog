@@ -48,8 +48,8 @@ Gemini
 실제로 테스트해보니 모델이 생성한 자연어 답변을 그대로 카카오톡 메시지로 전송하는 방식에 한계가 있다고 생각했다.
 
 <div style="display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
-  <img width="300" height="auto" alt="" src="image_1.png" />
-  <img width="300" height="auto" alt="" src="image_2.png" />
+  <img width="200" height="auto" alt="" src="image_1.png" />
+  <img width="200" height="auto" alt="" src="image_2.png" />
 </div>
 
 테스트한 결과, 아래와 같은 문제들을 확인했다.
@@ -170,7 +170,7 @@ thinking_config=types.ThinkingConfig(thinking_budget=0), # -1, 0, 1024, ...
 
 ### 2️⃣ 카카오톡 화면에서 보기 편한 답변 형식
 
-<img width="300" height="auto" alt="" src="image_5.png" />
+<img width="200" height="auto" alt="" src="image_5.png" />
 
 테스트하면서 제일 느꼈던 문제는 카카오톡 화면에서의 가독성이었다.
 모델이 보통 긴 문단으로 답변하거나 마크다운 문법을 사용했는데, 이는 카카오톡에서는 보기 어색했다.
@@ -184,7 +184,7 @@ thinking_config=types.ThinkingConfig(thinking_budget=0), # -1, 0, 1024, ...
 5. 중요한 키워드는 [대괄호]로 강조
 6. 리스트는 하이픈 기호(-) 사용
 
-<img width="300" height="auto" alt="" src="image_6.png" />
+<img width="200" height="auto" alt="" src="image_6.png" />
 
 이후 답변이 카카오톡 화면에서 훨씬 읽기 편하다고 느꼈다.
 
@@ -220,11 +220,11 @@ full_doc_block: 문서 전문 또는 전체 원문 요청
 
 <div style="display: flex; gap: 16px; justify-content: center; align-items: flex-start; flex-wrap: wrap; margin: 24px 0;">
   <div style="display: flex; flex-direction: column; gap: 16px;">
-    <img width="300" height="auto" alt="" src="image_7.png" />
-    <img width="300" height="auto" alt="" src="image_9.png" />
+    <img width="200" height="auto" alt="" src="image_7.png" />
+    <img width="200" height="auto" alt="" src="image_9.png" />
   </div>
 
-  <img width="300" height="auto" alt="" src="image_8.png" />
+  <img width="200" height="auto" alt="" src="image_8.png" />
 </div>
 
 ### 5️⃣ 서버 후검증 & 출처 표시
