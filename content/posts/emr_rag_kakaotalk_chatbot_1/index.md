@@ -1,7 +1,7 @@
 ---
 title: "🤖 RAG with Gemini File Search 기반 의료 진단 기록 카카오톡 챗봇 개발 기록 1️⃣"
 description: ""
-summary: ""
+summary: "Gemini File Search Store을 활용하고, 카카오톡 챗봇에서 인증된 환자의 의료 기록만 검색해 답변하는 RAG 기반 의료 기록 챗봇 개발 기록 1"
 date: 2026-04-29T21:32:46+09:00
 lastmod: 2026-04-29T21:32:46+09:00
 draft: false
