@@ -30,24 +30,37 @@
   publish = "public"
   autoLaunch = false
 
-# Redirects and rewrites — https://docs.netlify.com/routing/redirects/#syntax-for-the-netlify-configuration-file
+[[redirects]]
+  from = "/blog/"
+  to = "/posts/"
+  status = 301
+  force = true
 
-# Custom headers — https://docs.netlify.com/routing/headers/#syntax-for-the-netlify-configuration-file
-# [[headers]]
-#   for = "/*"
-#   [headers.values]
-#     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-#     X-Content-Type-Options = "nosniff"
-#     X-XSS-Protection = "1; mode=block"
-#     Content-Security-Policy = "default-src 'self'; manifest-src 'self'; connect-src 'self'; font-src 'self'; img-src 'self' https://avatars.githubusercontent.com data:; script-src 'self' 'nonce-dXNlcj0iaGVsbG8iLGRvbWFpbj0iaGVua3ZlcmxpbmRlLmNvbSIsZG9jdW1lbnQud3JpdGUodXNlcisiQCIrZG9tYWluKTs=' 'sha256-aWZ3y/RxbBYKHXH0z8+8ljrHG1mSBvyzSfxSMjBSaXk='; style-src 'self'"
-#     X-Frame-Options = "SAMEORIGIN"
-#     Referrer-Policy = "strict-origin"
-#     Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
-#     Cache-Control= '''
-#     public,
-#     max-age=31536000'''
-#     Access-Control-Allow-Origin = "*"
+[[redirects]]
+  from = "/blog/deep-researcher-with-test-time-diffusion-google-cloud2025-논문-리뷰/"
+  to = "/posts/paper_ttd-dr/"
+  status = 301
+  force = true
 
+[[redirects]]
+  from = "/blog/effective-context-engineering-for-ai-agents-anthropic-2025-09-29/"
+  to = "/posts/effective_context_engineering_anthropic/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/pynecone-시작하기-python으로-웹앱-만들기/"
+  to = "/posts/pynecone_start/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/matryoshka-representation-learning-2022-논문-리뷰-feat.-embeddinggemma/"
+  to = "/posts/mrl/"
+  status = 301
+  force = true
+
+# Custom headers
 [[headers]]
   for = "/*"
   [headers.values]
@@ -59,7 +72,7 @@
     Referrer-Policy          = "strict-origin"
     Permissions-Policy       = "geolocation=(self), microphone=(), camera=()"
 
-    # CSP 조정 (lazyload/inline 스크립트 + 외부 이미지 허용)
+    # CSP 조정: lazyload/inline 스크립트, utterances, 외부 이미지 허용
     Content-Security-Policy  = """
       default-src 'self';
       img-src 'self' https: data: blob:;
@@ -74,8 +87,6 @@
       upgrade-insecure-requests;
     """
 
-    # 캐시 정책은 상황 따라 유지/조정
-    Cache-Control = '''
-    public,
-    max-age=31536000'''
+    # SEO 안정화: HTML, sitemap.xml, robots.txt, 404 응답이 오래 캐시되지 않도록 조정
+    Cache-Control = "public, max-age=0, must-revalidate"
     Access-Control-Allow-Origin = "*"
