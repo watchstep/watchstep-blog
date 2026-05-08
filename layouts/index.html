@@ -62,7 +62,7 @@
 {{ with (first 1 (sort $allPosts "Date" "asc")) }}{{ $since = (index . 0).Date.Format "Jul 2, 2006" }}{{ end }}
 
 {{/* grid sizes */}}
-{{ $cell := 14 }} {{ $gap := 4 }} {{ $step := add $cell $gap }}
+{{ $cell := 15 }} {{ $gap := 4 }} {{ $step := add $cell $gap }}
 {{ $left := 64 }} {{ $top := 24 }}
 {{ $svgW := add $left (mul $weeks $step) }}
 {{ $svgH := add $top (mul 7 $step) }}

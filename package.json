@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "create": "hugo new",
-    "dev": "hugo server --disableFastRender --noHTTPCache",
+    "dev": "hugo server --environment production --baseURL http://localhost:1313/ --disableFastRender --noHTTPCache",
     "format": "prettier **/** -w -c",
     "build": "hugo --gc --minify --cleanDestinationDir -b https://blog.watchstep.me/",
     "preview": "vite preview --outDir public"

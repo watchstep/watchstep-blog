@@ -40,10 +40,10 @@ code, pre, kbd, samp {
 
 /* 레이아웃 */
 .ws-center{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
-.ws-lawn-wrap{ display:flex; justify-content:center; width:100%; margin-top:22px; --ws-left: 64px; }
-.ws-lawn{ shape-rendering:crispEdges; transform: translateX(calc(-0.5 * var(--ws-left))); }
+.ws-lawn-wrap{ display:flex; justify-content:center; width:100%; margin-top:32px; --ws-left: 64px; --ws-grid-nudge: 4px; }
+.ws-lawn{ shape-rendering:crispEdges; transform: translateX(calc(-0.5 * var(--ws-left) + var(--ws-grid-nudge))); }
 .ws-legend-row{ display:flex; align-items:center; gap:6px; margin-top:8px; font-size:12px;
-  transform: translateX(calc(-0.5 * var(--ws-left))); }
+  transform: translateX(calc(-0.5 * var(--ws-left) + var(--ws-grid-nudge, 0px))); }
 
 /* 라벨 */
 .ws-month, .ws-weekdays, .ws-legend-label{ fill:var(--ws-muted,#6b7280); color:var(--ws-muted,#6b7280); }
@@ -344,4 +344,17 @@ article > h1:first-child {
 
 .docs-navigation .card-body {
   padding: 1.25rem 1.5rem;
+}
+
+/* Home-only vertical rhythm: keep footer from crowding the custom dashboard. */
+.home .content {
+  padding-top: clamp(1.5rem, 3vh, 3rem);
+  padding-bottom: clamp(5rem, 12vh, 9rem);
+}
+
+@media (max-width: 720px) {
+  .home .content {
+    padding-top: 1.5rem;
+    padding-bottom: clamp(4rem, 10vh, 6rem);
+  }
 }
