@@ -8,7 +8,7 @@
     "create": "hugo new",
     "dev": "hugo server --environment production --baseURL http://localhost:1313/ --disableFastRender --noHTTPCache",
     "format": "prettier **/** -w -c",
-    "build": "hugo --gc --minify --cleanDestinationDir -b https://blog.watchstep.me/",
+    "build": "hugo --gc --minify --cleanDestinationDir -b https://blog.watchstep.site/",
     "preview": "vite preview --outDir public"
   },
   "dependencies": {

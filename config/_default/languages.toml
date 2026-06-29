@@ -5,6 +5,5 @@
   [en.params]
     languageISO = "EN"
     languageTag = "en-US"
-    footer = '© 2025 • <a href="https://blog.watchstep.me" class="text-muted">watchstep</a>'
+    footer = '© 2025 • <a href="https://blog.watchstep.site" class="text-muted">watchstep</a>'
     alertText = '🚀 Welcome to Watchstep Blog!'
-

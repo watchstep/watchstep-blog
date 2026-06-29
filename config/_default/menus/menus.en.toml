@@ -18,7 +18,7 @@
 
 [[footer]]
   name = "About Me"
-  url = "https://watchstep.me/"
+  url = "https://watchstep.site/"
   weight = 10
   [footer.params]
     external = true

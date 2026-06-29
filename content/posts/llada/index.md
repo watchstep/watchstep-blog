@@ -14,7 +14,7 @@ homepage: false
 seo:
   title: "LLaDA 논문 리뷰" # custom title (optional)
   description: "" # custom description (recommended)
-  canonical: "https://blog.watchstep.me/posts/llada/" # custom canonical URL (optional)
+  canonical: "https://blog.watchstep.site/posts/llada/" # custom canonical URL (optional)
   noindex: false # false (default) or true
 ---
 

@@ -26,7 +26,7 @@ seo:
 
 [https://strategizeyourcareer.com/p/harness-engineering-ai-agents](https://strategizeyourcareer.com/p/harness-engineering-ai-agents)
 
-👀 이전 블로그 글에 [**Harness 개념**](https://blog.watchstep.me/posts/harness_engineering/)을 정리했으니 참고하길 바란다!
+👀 이전 블로그 글에 [**Harness 개념**](https://blog.watchstep.site/posts/harness_engineering/)을 정리했으니 참고하길 바란다!
 
 Harness를 간단히 말하자면, 모델이 아닌 모든 것으로, 모델이 잘 작동할 수 있도록 돕는 환경 자체를 의미한다. 모델이 🐴 말이면, Harness는 안장으로, 말이 잘 달릴 수 있도록 이끌어주는 것이다.
 

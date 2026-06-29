@@ -1,5 +1,5 @@
 title = "Watchstep Blog"
-baseURL = "https://blog.watchstep.me/"
+baseURL = "https://blog.watchstep.site/"
 canonifyURLs = true
 relativeURLs = false
 disableAliases = true
