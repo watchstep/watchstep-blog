@@ -4,21 +4,21 @@
 {{ $pageTitle := or .Title .Site.Title }}
 {{ $subtitle  := or .Params.lead (site.Params.home.subtitle | default "Step into AI & development.") }}
 
-{{/* ───────── 6개월(26주) 윈도우: 이번 주(월요일) 기준 + 자정 정규화 ───────── */}}
+{{/* ───────── 6개월(26주) 윈도우: 이번 주(월요일) 기준 ───────── */}}
+{{/* 날짜는 모두 KST(UTC+9) 에포크 '일' 번호로 다룬다 → 빌드 서버 타임존과 무관 */}}
 {{ $now := now }}
 {{ $weeks := 26 }}
 {{ $oneDay := 86400 }}
-{{ $wdmap := dict "Mon" 0 "Tue" 1 "Wed" 2 "Thu" 3 "Fri" 4 "Sat" 5 "Sun" 6 }}
+{{ $tz := 32400 }}
 
-{{/* 이번 주 월요일(week start) */}}
-{{ $shiftNow := index $wdmap (dateFormat "Mon" $now) | default 0 }}
-{{ $startOfThisWeek := sub $now.Unix (mul $shiftNow $oneDay) }}
+{{ $today := div (add $now.Unix $tz) $oneDay }}
+{{ $todayDate := (time (mul $today $oneDay)).UTC }}
+
+{{/* 1970-01-01(day 0)은 목요일 → (day + 3) mod 7 = 월 0 … 일 6 */}}
+{{ $weekday := mod (add $today 3) 7 }}
 
 {{/* 히트맵은 "이번 주"를 마지막 열로 두고, 과거로 (26-1)주 */}}
-{{ $start := sub $startOfThisWeek (mul (mul (sub $weeks 1) 7) $oneDay) }}
-
-{{/* 자정(UTC) 정규화 → DST/타임존 드리프트 제거 */}}
-{{ $start = mul (div $start $oneDay) $oneDay }}
+{{ $startDay := sub (sub $today $weekday) (mul (sub $weeks 1) 7) }}
 
 {{/* 블로그 글 */}}
 {{ $posts := site.GetPage "section" "posts" }}
@@ -26,16 +26,18 @@
 {{ $allPosts := cond $posts $posts.RegularPagesRecursive (slice) }}
 {{ $allPosts = where $allPosts "Draft" "!=" true }}
 
-{{/* 날짜별 카운트(히트맵): 에포크 '일' 키로 집계 */}}
+{{/* 날짜별 카운트(히트맵): KST 에포크 '일' 키로 집계 */}}
 {{ $S := newScratch }}
-{{ range $p := where $allPosts "Date.Unix" ">" $start }}
-  {{ $dayKey := div $p.Date.Unix $oneDay }}  {{/* floor(unix/86400) */}}
-  {{ $S.Set (printf "d.%d" $dayKey) (add 1 ($S.Get (printf "d.%d" $dayKey) | default 0)) }}
+{{ range $p := $allPosts }}
+  {{ $dayKey := div (add $p.Date.Unix $tz) $oneDay }}
+  {{ if ge $dayKey $startDay }}
+    {{ $S.Set (printf "d.%d" $dayKey) (add 1 ($S.Get (printf "d.%d" $dayKey) | default 0)) }}
+  {{ end }}
 {{ end }}
 
 {{/* 통계 */}}
 {{ $totalPosts := len $allPosts }}
-{{ $thisMonth := $now.Format "2006-01" }}
+{{ $thisMonth := $todayDate.Format "2006-01" }}
 {{ $SC := newScratch }}{{ $SC.Set "mcount" 0 }}
 {{ range $p := $allPosts }}
   {{ if eq ($p.Date.Format "2006-01") $thisMonth }}
@@ -90,7 +92,7 @@
       <div class="ws-metric">
         <div class="ws-metric__label">This month</div>
         <div class="ws-metric__value">{{ $thisMonthCount }} <span class="ws-unit">posts</span></div>
-        <div class="ws-metric__sub">{{ $now.Format "Jan 2006" }}</div>
+        <div class="ws-metric__sub">{{ $todayDate.Format "Jan 2006" }}</div>
       </div>
       <div class="ws-metric">
         <div class="ws-metric__label">Top tags</div>
@@ -114,10 +116,10 @@
         <g class="ws-months" font-size="11">
           {{ $lastM := "" }}
           {{ range $w := seq $weeks }}
-            {{ $colU := add $start (mul (mul (sub $w 1) 7) $oneDay) }}
-            {{ $dt := time $colU }}
-            {{ $m := dateFormat "Jan" $dt }}
-            {{ $d := int (dateFormat "2" $dt) }}
+            {{ $colDay := add $startDay (mul (sub $w 1) 7) }}
+            {{ $dt := (time (mul $colDay $oneDay)).UTC }}
+            {{ $m := $dt.Format "Jan" }}
+            {{ $d := $dt.Day }}
             {{ if and (ne $m $lastM) (le $d 7) }}
               <text x="{{ add $left (mul (sub $w 1) $step) }}" y="12" class="ws-month">{{ $m }}</text>
               {{ $lastM = $m }}
@@ -133,15 +135,13 @@
 
         <g class="ws-cells">
           {{ range $w := seq $weeks }}
-            {{ $colBase := add $start (mul (mul (sub $w 1) 7) $oneDay) }}
+            {{ $colDay := add $startDay (mul (sub $w 1) 7) }}
             {{ range $d := seq 7 }}
-              {{ $u := add $colBase (mul (sub $d 1) $oneDay) }}
-              {{ $dt := time $u }}
+              {{ $day := add $colDay (sub $d 1) }}
 
-              {{/* 셀 조회도 에포크 '일' 키로 */}}
-              {{ $uday := div $u $oneDay }}
-              {{ $cnt := $S.Get (printf "d.%d" $uday) | default 0 }}
-              {{ $key := $dt.Format "2006-01-02" }}  {{/* tooltip */}}
+              {{/* 셀 조회도 KST 에포크 '일' 키로 */}}
+              {{ $cnt := $S.Get (printf "d.%d" $day) | default 0 }}
+              {{ $key := (time (mul $day $oneDay)).UTC.Format "2006-01-02" }}  {{/* tooltip */}}
 
               {{/* ── 3단계 팔레트: 0 / 1 / 2+  ── */}}
               {{ $lvl := 0 }}

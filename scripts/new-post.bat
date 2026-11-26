@@ -66,7 +66,7 @@ if "!SLUG!" neq "!SLUG:  =_!" (
 set SLUG=!SLUG: =_!
 
 :: Create folder path
-set DIR=blog\%YEAR%\%MONTH%\%SLUG%
+set DIR=posts\%SLUG%
 set PATH_MD=%DIR%\index.md
 set FULL_PATH=content\%PATH_MD%
 
